@@ -1,0 +1,1 @@
+# lodc2022-culture-art

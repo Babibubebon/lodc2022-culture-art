@@ -1,0 +1,15 @@
+body {
+	overflow-wrap: break-word;
+	word-break: keep-all;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.book-page {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+article {
+  flex: 1;
+}

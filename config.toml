@@ -1,10 +1,11 @@
-baseURL = 'http://example.org/'
+baseURL = 'https://lodc2022-culture-art.metadata.moe/'
 languageCode = 'ja-jp'
 title = '文化・芸術とLOD ハンズオン'
 
 theme = 'book'
 
-enableGitInfo = true
-
 [params]
 BookRepo = 'https://github.com/Babibubebon/lodc2022-culture-art'
+BookCommitPath = 'commit'
+BookEditPath = 'edit/master'
+BookComments = false

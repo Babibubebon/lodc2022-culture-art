@@ -1,8 +1,11 @@
 ---
-title: "Content Placeholder"
-_build:
-  render: never
-  list: never
-  publishResources: false
+title: "はじめに"
+weight: 1
+# bookFlatSection: false
+# bookToc: true
+# bookHidden: false
+# bookCollapseSection: false
+# bookComments: false
+# bookSearchExclude: false
 ---
 
