@@ -1,0 +1,7 @@
+{{ $q := trim .Inner "\n" }}
+
+{{ highlight $q "sparql" }}
+<a class="book-btn"
+   onclick="setYasguiQuery('{{ .Get "yasgui-id" }}', '{{ .Get "title" }}', '{{ $q }}'); location.href='#{{ .Get "yasgui-id" }}'">
+    ▶ 実行する
+</a>

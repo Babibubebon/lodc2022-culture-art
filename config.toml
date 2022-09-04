@@ -4,8 +4,26 @@ title = '文化・芸術とLOD ハンズオン'
 
 theme = 'book'
 
+pygmentsCodeFences = true
+
 [params]
 BookRepo = 'https://github.com/Babibubebon/lodc2022-culture-art'
 BookCommitPath = 'commit'
 BookEditPath = 'edit/master'
 BookComments = false
+
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ''
+    hl_inline = false
+    lineAnchors = ''
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = false
+    noClasses = true
+    noHl = false
+    style = 'dracula'
+    tabWidth = 4

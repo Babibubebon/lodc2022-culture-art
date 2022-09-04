@@ -1,7 +1,16 @@
 body {
-	overflow-wrap: break-word;
-	word-break: keep-all;
+  overflow-wrap: break-word;
+  word-break: keep-all;
   font-family: 'Noto Sans JP', sans-serif;
+}
+
+code, .CodeMirror * {
+  font-family: 'M PLUS 1 Code', monospace;
+  font-weight: 500;
+}
+
+.book-btn {
+  font-weight: bold;
 }
 
 .book-page {
