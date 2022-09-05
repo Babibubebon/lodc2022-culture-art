@@ -11,6 +11,7 @@ BookRepo = 'https://github.com/Babibubebon/lodc2022-culture-art'
 BookCommitPath = 'commit'
 BookEditPath = 'edit/master'
 BookComments = false
+CodeMirrorTheme = 'dracula'
 
 [markup]
   [markup.highlight]
@@ -23,7 +24,7 @@ BookComments = false
     lineNoStart = 1
     lineNos = true
     lineNumbersInTable = false
-    noClasses = true
+    noClasses = false
     noHl = false
     style = 'dracula'
     tabWidth = 4

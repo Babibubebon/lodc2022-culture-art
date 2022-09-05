@@ -1,7 +1,7 @@
 {{ if .HasShortcode "yasgui" }}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@triply/yasgui@4.2.27/build/yasgui.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/@triply/yasgui@4.2.27/build/yasgui.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/theme/dracula.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/theme/{{ .Site.Params.CodeMirrorTheme }}.css">
 <script>
   const yasgui = {};
   function setYasguiQuery(yasguiId, tabName, query) {

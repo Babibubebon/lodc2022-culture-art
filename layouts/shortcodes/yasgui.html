@@ -13,7 +13,7 @@
     persistenceId: "{{ .Get "id" }}",
     copyEndpointOnNewTab: false,
     yasqe: {
-      theme: "dracula",
+      theme: "{{ .Site.Params.CodeMirrorTheme }}",
       {{ with .Get "default-query" }}
       value: {{ . }}
       {{ end }}
