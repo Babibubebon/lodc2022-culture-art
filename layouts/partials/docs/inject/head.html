@@ -4,15 +4,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/theme/{{ .Site.Params.CodeMirrorTheme }}.css">
 <script>
   const yasgui = {};
-  function setYasguiQuery(yasguiId, tabName, query) {
+  function setYasguiQuery(yasguiId, tabName, query, endpoint) {
     let yasguiInstance = yasgui[yasguiId];
     let tab = yasguiInstance.getTab(tabName);
     if (!tab) {
       tab = yasguiInstance.addTab(true, {
          ...Yasgui.Tab.getDefaults(),
-         requestConfig: yasguiInstance.config.requestConfig,
+         requestConfig: endpoint ? {endpoint: endpoint} : yasguiInstance.config.requestConfig,
          name: tabName,
-         id: tabName });
+         id: tabName
+      });
     }
     tab.setQuery(query);
     tab.yasqe.query();

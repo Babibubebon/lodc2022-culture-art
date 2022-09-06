@@ -15,16 +15,22 @@
     copyEndpointOnNewTab: false,
     yasqe: {
       theme: "{{ .Site.Params.CodeMirrorTheme }}",
-      {{ with .Get "default-query" }}
-      value: {{ . }}
+      {{ with .Inner }}
+      value: {{ trim . "\n" }}
       {{ end }}
     },
   });
 </script>
-{{ if .Get "endpoint" }}
+
 <style>
+  {{- if .Get "endpoint" }}
   #yasgui-{{ .Get "id" }} .yasgui .autocompleteWrapper {
     display: none !important;
   }
+  {{- end -}}
+  {{ if not (default true (.Get "tab")) }}
+  #yasgui-{{ .Get "id" }} .yasgui .tabsList {
+    display: none !important;
+  }
+  {{- end }}
 </style>
-{{ end }}

@@ -2,6 +2,6 @@
 
 {{ highlight $q "sparql" }}
 <a class="book-btn"
-   onclick="setYasguiQuery('{{ .Get "yasgui-id" }}', '{{ .Get "title" }}', '{{ $q }}'); location.href='#yasgui-{{ .Get "yasgui-id" }}'">
+   onclick="setYasguiQuery('{{ .Get "yasgui-id" }}', '{{ .Get "title" }}', '{{ $q }}', '{{ .Get "endpoint" }}'); location.href='#yasgui-{{ .Get "yasgui-id" }}'">
     ▶ 実行する
 </a>
