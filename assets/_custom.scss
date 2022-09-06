@@ -1,7 +1,10 @@
 body {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+aside {
   overflow-wrap: break-word;
   word-break: keep-all;
-  font-family: 'Noto Sans JP', sans-serif;
 }
 
 code, .CodeMirror * {
