@@ -1,6 +1,8 @@
-{{ $q := trim .Inner "\n" }}
+{{- $q := trim .Inner "\n" -}}
+{{- $hlLines := (default "" (.Get "hl_lines")) | printf "hl_Lines=%s"  -}}
 
-{{ highlight $q "sparql" }}
+{{ highlight $q "sparql" $hlLines }}
+
 <a class="book-btn"
    onclick="setYasguiQuery('{{ .Get "yasgui-id" }}', '{{ .Get "title" }}', '{{ $q }}', '{{ .Get "endpoint" }}'); location.href='#yasgui-{{ .Get "yasgui-id" }}'">
     ▶ 実行する
