@@ -23,6 +23,33 @@ federatedクエリを利用したクエリを紹介します。
 
 ## クエリ集 {#queries}
 
+### 作品の多言語のタイトルを取得する {#multilingual-titles}
+https://mediaarts-db.bunka.go.jp/id/C413599
+
+[P7886(メディア芸術データベース識別子)](https://www.wikidata.org/wiki/Property:P7886)
+
+{{< yasgui-query yasgui-id="federated" title="作品の多言語のタイトルを取得する" endpoint="https://mediag.bunka.go.jp/sparql" >}}
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX ma:     <https://mediaarts-db.bunka.go.jp/data/property#>
+PREFIX wdt:    <http://www.wikidata.org/prop/direct/>
+
+SELECT
+  ?MADBLabel ?label (LANG(?label) AS ?lang) ?wikidataEntity
+WHERE {
+  <https://mediaarts-db.bunka.go.jp/id/C413599>
+    schema:identifier ?MADBID ;
+    rdfs:label ?MADBLabel .
+  # Wikidataへクエリ
+  SERVICE <https://query.wikidata.org/sparql> {
+    # P7886: メディア芸術データベース識別子
+    ?wikidataEntity wdt:P7886 ?MADBID ;
+                    rdfs:label ?label .
+  }
+}
+{{< / yasgui-query >}}
+
+
 ### メディア芸術データベースの責任主体の法人番号を取得する {#agent-houjin-bangou}
 Wikidataとメディア芸術データベースを連携したfederatedクエリ
 
@@ -32,6 +59,7 @@ Wikidataとメディア芸術データベースを連携したfederatedクエリ
 PREFIX schema: <https://schema.org/>
 PREFIX class:  <https://mediaarts-db.bunka.go.jp/data/class#>
 PREFIX ma:     <https://mediaarts-db.bunka.go.jp/data/property#>
+PREFIX wdt:    <http://www.wikidata.org/prop/direct/>
 
 SELECT
   ?agent ?name ?hojinBangou
@@ -45,11 +73,12 @@ WHERE {
   # Wikidata
   SERVICE <https://query.wikidata.org/sparql> {
     # P3225: 法人番号
-    ?wikidataEntity <http://www.wikidata.org/prop/direct/P3225> ?hojinBangou ;
+    ?wikidataEntity wdt:P3225 ?hojinBangou ;
   }
 }
 LIMIT 100
 {{< / yasgui-query >}}
+
 
 ### 「日本ゲーム大賞」を受賞したゲームを取得する {#japan-game-awards}
 DBpedia JapaneseとWikidataとメディア芸術データベースを連携したfederatedクエリ
