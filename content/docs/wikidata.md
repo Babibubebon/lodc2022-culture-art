@@ -170,6 +170,27 @@ WHERE {
 {{< / yasgui-query >}}
 
 
+### 映画とその物語の場所を地図上に {#japanese-movies-narrative-location}
+- [P840 (物語の舞台)](https://www.wikidata.org/wiki/Property:P840)
+- [P625 (位置座標)](https://www.wikidata.org/wiki/Property:P625)
+
+```sparql
+#defaultView:Map
+SELECT ?movie ?movieLabel ?narrative_location ?narrative_locationLabel ?coordinates
+WHERE {
+   ?movie wdt:P840 ?narrative_location ;
+          wdt:P495 wd:Q17 ; # 日本
+          wdt:P31 wd:Q11424 . # 映画
+   ?narrative_location wdt:P625 ?coordinates .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],ja,en". }
+}
+```
+
+{{< button href="https://w.wiki/5g7e" >}}Wikidata Query Serviceで実行{{< / button >}}
+
+Ref. [Wikidata:SPARQLクエリサービス/クエリ/例#映画とその物語の場所を地図上に](https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/queries/examples/ja#%E6%98%A0%E7%94%BB%E3%81%A8%E3%81%9D%E3%81%AE%E7%89%A9%E8%AA%9E%E3%81%AE%E5%A0%B4%E6%89%80%E3%82%92%E5%9C%B0%E5%9B%B3%E4%B8%8A%E3%81%AB)より
+
+
 ### SFライトノベル {#love-comedy-lightnovel}
 - [P31 (分類, instance of)](https://www.wikidata.org/wiki/Property:P31)
 - [P279 (上位クラス)](https://www.wikidata.org/wiki/Property:P279)
