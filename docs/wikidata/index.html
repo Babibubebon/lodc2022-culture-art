@@ -1,0 +1,194 @@
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Wikidata # https://www.wikidata.org/
+Wikidata Query Service ウィキデータ:SPARQLチュートリアル Wikidata:SPARQLクエリサービス/クエリ/例 データモデル Wikibase/DataModel/Primer Wikibase/Indexing/RDF Dump Format SPARQLクエリエディタ # Endpoint: https://query.wikidata.org/sparql 文化・芸術系に関係のあるクラス # Help:基本構成プロパティ
+Q838948 (芸術作品) Q7725634 (文学作品) Q747381 (ライトノベル) Q104213567 (ライトノベルシリーズ) Q8274 (日本の漫画) Q21198342 (日本の連載漫画) Q21202185 (日本の読み切り漫画) Q4502142 (視覚芸術作品) Q11424 (映画) Q1107 (日本のアニメ) Q581714 (アニメシリーズ) Q63952888 (テレビアニメシリーズ) Q11086742 (テレビアニメ) Q202866 (アニメーション映画) Q220898 (OVA) Q7889 (コンピュータゲーム) &mldr;
+&ldquo;芸術作品&rdquo; の下位クラスを探す # 1PREFIX bd: <http://www.bigdata.com/rdf#> 2PREFIX wikibase: <http://wikiba.se/ontology#> 3PREFIX wd: <http://www.wikidata.org/entity/> 4PREFIX wdt: <http://www.wikidata.org/prop/direct/> 5PREFIX xsd: <http://www."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="Wikidata"><meta property="og:description" content="Wikidata # https://www.wikidata.org/
+Wikidata Query Service ウィキデータ:SPARQLチュートリアル Wikidata:SPARQLクエリサービス/クエリ/例 データモデル Wikibase/DataModel/Primer Wikibase/Indexing/RDF Dump Format SPARQLクエリエディタ # Endpoint: https://query.wikidata.org/sparql 文化・芸術系に関係のあるクラス # Help:基本構成プロパティ
+Q838948 (芸術作品) Q7725634 (文学作品) Q747381 (ライトノベル) Q104213567 (ライトノベルシリーズ) Q8274 (日本の漫画) Q21198342 (日本の連載漫画) Q21202185 (日本の読み切り漫画) Q4502142 (視覚芸術作品) Q11424 (映画) Q1107 (日本のアニメ) Q581714 (アニメシリーズ) Q63952888 (テレビアニメシリーズ) Q11086742 (テレビアニメ) Q202866 (アニメーション映画) Q220898 (OVA) Q7889 (コンピュータゲーム) &mldr;
+&ldquo;芸術作品&rdquo; の下位クラスを探す # 1PREFIX bd: <http://www.bigdata.com/rdf#> 2PREFIX wikibase: <http://wikiba.se/ontology#> 3PREFIX wd: <http://www.wikidata.org/entity/> 4PREFIX wdt: <http://www.wikidata.org/prop/direct/> 5PREFIX xsd: <http://www."><meta property="og:type" content="article"><meta property="og:url" content="https://lodc2022-culture-art.metadata.moe/docs/wikidata/"><meta property="article:section" content="docs"><title>Wikidata | 文化・芸術とLOD ハンズオン</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.d2a9252a1314abcda8c9cb0a0a7d95cb478b6ca9a60573f18956a6bd4197eb1d.css integrity="sha256-0qklKhMUq82oycsKCn2Vy0eLbKmmBXPxiVamvUGX6x0=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.78be5f4560bd4a932b887bf7ca42354455930af6a226caa30106d48f9fd189b1.js integrity="sha256-eL5fRWC9SpMriHv3ykI1RFWTCvaiJsqjAQbUj5/RibE=" crossorigin=anonymous></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@triply/yasgui@4.2.27/build/yasgui.min.css><script src=https://cdn.jsdelivr.net/npm/@triply/yasgui@4.2.27/build/yasgui.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/codemirror@5.65.8/theme/dracula.css><script>const yasgui={};function setYasguiQuery(e,t,n,s){let i=yasgui[e],o=i.getTab(t);o||(o=i.addTab(!0,{...Yasgui.Tab.getDefaults(),requestConfig:s?{endpoint:s}:i.config.requestConfig,name:t,id:t}));try{o.setQuery(n)}catch{o.close(),o=i.addTab(!0,{...Yasgui.Tab.getDefaults(),requestConfig:s?{endpoint:s}:i.config.requestConfig,name:t,id:t})}o.yasqe.query()}</script><style>.yasr table.dataTable{max-width:100%}.yasr table.dataTable tbody td{padding:2px 4px;font-size:90%}</style></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>文化・芸術とLOD ハンズオン</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/docs/start/>はじめに</a></li><li><a href=/docs/mediaartsdb/>メディア芸術データベース</a></li><li><a href=/docs/wikidata/ class=active>Wikidata</a></li><li><a href=/docs/federated_query/>複数エンドポイントの横断的活用</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>Wikidata</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#query-editor>SPARQLクエリエディタ</a></li><li><a href=#文化芸術系に関係のあるクラス>文化・芸術系に関係のあるクラス</a><ul><li><a href=#芸術作品-の下位クラスを探す>&ldquo;芸術作品&rdquo; の下位クラスを探す</a></li><li><a href=#日本のアニメおよび漫画-の一部分下位クラスを探す>&ldquo;日本のアニメおよび漫画&rdquo; の一部分・下位クラスを探す</a></li></ul></li><li><a href=#文化芸術系に関係のあるプロパティ>文化・芸術系に関係のあるプロパティ</a><ul><li><a href=#メディア芸術データベースとのリンク>メディア芸術データベースとのリンク</a></li></ul></li><li><a href=#クエリ例>クエリ例</a><ul><li><a href=#japanese-movies-released-2020>2020年に公開された邦画</a></li><li><a href=#love-comedy-lightnovel>SFライトノベル</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1 id=wikidata>Wikidata
+<a class=anchor href=#wikidata>#</a></h1><p><a href=https://www.wikidata.org/>https://www.wikidata.org/</a></p><ul><li><a href=https://query.wikidata.org/>Wikidata Query Service</a></li><li><a href=https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial/ja>ウィキデータ:SPARQLチュートリアル</a></li><li><a href=https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/queries/examples/ja>Wikidata:SPARQLクエリサービス/クエリ/例</a></li><li>データモデル<ul><li><a href=https://www.mediawiki.org/wiki/Wikibase/DataModel/Primer>Wikibase/DataModel/Primer</a></li><li><a href=https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format>Wikibase/Indexing/RDF Dump Format</a></li></ul></li></ul><h2 id=query-editor>SPARQLクエリエディタ
+<a class=anchor href=#query-editor>#</a></h2><div><p>Endpoint: <code>https://query.wikidata.org/sparql</code></p><div id=yasgui-wikidata></div></div><script>yasgui.wikidata=new Yasgui(document.getElementById("yasgui-wikidata"),{requestConfig:{endpoint:"https://query.wikidata.org/sparql"},persistenceId:"wikidata",autofocus:!1,copyEndpointOnNewTab:!1,yasqe:{theme:"dracula",value:`PREFIX wd: \u003chttp://www.wikidata.org/entity/\u003e
+PREFIX wdt: \u003chttp://www.wikidata.org/prop/direct/\u003e
+
+SELECT * WHERE {
+  ?sub ?pred ?obj .
+} LIMIT 10`}})</script><style>#yasgui-wikidata .yasgui .autocompleteWrapper{display:none!important}</style><h2 id=文化芸術系に関係のあるクラス>文化・芸術系に関係のあるクラス
+<a class=anchor href=#%e6%96%87%e5%8c%96%e8%8a%b8%e8%a1%93%e7%b3%bb%e3%81%ab%e9%96%a2%e4%bf%82%e3%81%ae%e3%81%82%e3%82%8b%e3%82%af%e3%83%a9%e3%82%b9>#</a></h2><p><a href=https://www.wikidata.org/wiki/Help:Basic_membership_properties/ja>Help:基本構成プロパティ</a></p><ul><li><a href=https://www.wikidata.org/entity/Q838948>Q838948 (芸術作品)</a></li><li><a href=https://www.wikidata.org/entity/Q7725634>Q7725634 (文学作品)</a></li><li><a href=https://www.wikidata.org/entity/Q747381>Q747381 (ライトノベル)</a></li><li><a href=https://www.wikidata.org/entity/Q104213567>Q104213567 (ライトノベルシリーズ)</a></li><li><a href=https://www.wikidata.org/entity/Q8274>Q8274 (日本の漫画)</a></li><li><a href=https://www.wikidata.org/entity/Q21198342>Q21198342 (日本の連載漫画)</a></li><li><a href=https://www.wikidata.org/entity/Q21198342>Q21202185 (日本の読み切り漫画)</a></li><li><a href=https://www.wikidata.org/entity/Q4502142>Q4502142 (視覚芸術作品)</a></li><li><a href=https://www.wikidata.org/entity/Q11424>Q11424 (映画)</a></li><li><a href=https://www.wikidata.org/entity/Q1107>Q1107 (日本のアニメ)</a></li><li><a href=https://www.wikidata.org/entity/Q581714>Q581714 (アニメシリーズ)</a></li><li><a href=https://www.wikidata.org/entity/Q63952888>Q63952888 (テレビアニメシリーズ)</a></li><li><a href=https://www.wikidata.org/entity/Q11086742>Q11086742 (テレビアニメ)</a></li><li><a href=https://www.wikidata.org/entity/Q202866>Q202866 (アニメーション映画)</a></li><li><a href=https://www.wikidata.org/entity/Q220898>Q220898 (OVA)</a></li><li><a href=https://www.wikidata.org/entity/Q7889>Q7889 (コンピュータゲーム)</a></li></ul><p>&mldr;</p><h3 id=芸術作品-の下位クラスを探す>&ldquo;芸術作品&rdquo; の下位クラスを探す
+<a class=anchor href=#%e8%8a%b8%e8%a1%93%e4%bd%9c%e5%93%81-%e3%81%ae%e4%b8%8b%e4%bd%8d%e3%82%af%e3%83%a9%e3%82%b9%e3%82%92%e6%8e%a2%e3%81%99>#</a></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-sparql data-lang=sparql><span class=line><span class=ln> 1</span><span class=cl><span class=k>PREFIX</span> <span class=nn>bd</span><span class=p>:</span> <span class=nl>&lt;http://www.bigdata.com/rdf#&gt;</span>
+</span></span><span class=line><span class=ln> 2</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wikibase</span><span class=p>:</span> <span class=nl>&lt;http://wikiba.se/ontology#&gt;</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wd</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/entity/&gt;</span>
+</span></span><span class=line><span class=ln> 4</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wdt</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/prop/direct/&gt;</span>
+</span></span><span class=line><span class=ln> 5</span><span class=cl><span class=k>PREFIX</span> <span class=nn>xsd</span><span class=p>:</span> <span class=nl>&lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>
+</span></span><span class=line><span class=ln> 7</span><span class=cl><span class=k>SELECT</span>
+</span></span><span class=line><span class=ln> 8</span><span class=cl>  <span class=nv>?entity</span> <span class=nv>?entityLabel</span>
+</span></span><span class=line><span class=ln> 9</span><span class=cl><span class=k>WHERE</span> <span class=p>{</span>
+</span></span><span class=line><span class=ln>10</span><span class=cl>  <span class=c># &#34;芸術作品&#34; の下位クラス</span>
+</span></span><span class=line><span class=ln>11</span><span class=cl>  <span class=nv>?entity</span> <span class=nn>wdt</span><span class=p>:</span><span class=nt>P279</span><span class=o>*</span> <span class=nn>wd</span><span class=p>:</span><span class=nt>Q838948</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>12</span><span class=cl>  <span class=k>SERVICE</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>label</span> <span class=p>{</span> <span class=nn>bd</span><span class=p>:</span><span class=nt>serviceParam</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>language</span> <span class=s>&#34;[AUTO_LANGUAGE],ja,en&#34;</span><span class=p>.</span> <span class=p>}</span>
+</span></span><span class=line><span class=ln>13</span><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=ln>14</span><span class=cl><span class=k>LIMIT</span> <span class=mi>1000</span></span></span></code></pre></div><a class=book-btn onclick='setYasguiQuery("wikidata","作品の多言語のタイトルを取得する",`PREFIX bd: \u003chttp://www.bigdata.com/rdf#\u003e
+PREFIX wikibase: \u003chttp://wikiba.se/ontology#\u003e
+PREFIX wd: \u003chttp://www.wikidata.org/entity/\u003e
+PREFIX wdt: \u003chttp://www.wikidata.org/prop/direct/\u003e
+PREFIX xsd: \u003chttp://www.w3.org/2001/XMLSchema#\u003e
+
+SELECT
+  ?entity ?entityLabel
+WHERE {
+  # \u0022芸術作品\u0022 の下位クラス
+  ?entity wdt:P279* wd:Q838948 .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language \u0022[AUTO_LANGUAGE],ja,en\u0022. }
+}
+LIMIT 1000`,""),location.href="#yasgui-wikidata"'>▶ 実行する</a><h3 id=日本のアニメおよび漫画-の一部分下位クラスを探す>&ldquo;日本のアニメおよび漫画&rdquo; の一部分・下位クラスを探す
+<a class=anchor href=#%e6%97%a5%e6%9c%ac%e3%81%ae%e3%82%a2%e3%83%8b%e3%83%a1%e3%81%8a%e3%82%88%e3%81%b3%e6%bc%ab%e7%94%bb-%e3%81%ae%e4%b8%80%e9%83%a8%e5%88%86%e4%b8%8b%e4%bd%8d%e3%82%af%e3%83%a9%e3%82%b9%e3%82%92%e6%8e%a2%e3%81%99>#</a></h3><p><a href=https://www.wikidata.org/wiki/Q10901350>Q10901350　(日本のアニメおよび漫画)</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sparql data-lang=sparql><span class=line><span class=ln> 1</span><span class=cl><span class=k>PREFIX</span> <span class=nn>bd</span><span class=p>:</span> <span class=nl>&lt;http://www.bigdata.com/rdf#&gt;</span>
+</span></span><span class=line><span class=ln> 2</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wikibase</span><span class=p>:</span> <span class=nl>&lt;http://wikiba.se/ontology#&gt;</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wd</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/entity/&gt;</span>
+</span></span><span class=line><span class=ln> 4</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wdt</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/prop/direct/&gt;</span>
+</span></span><span class=line><span class=ln> 5</span><span class=cl><span class=k>PREFIX</span> <span class=nn>xsd</span><span class=p>:</span> <span class=nl>&lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>
+</span></span><span class=line><span class=ln> 7</span><span class=cl><span class=k>SELECT</span>
+</span></span><span class=line><span class=ln> 8</span><span class=cl>  <span class=nv>?entity</span> <span class=nv>?entityLabel</span>
+</span></span><span class=line><span class=ln> 9</span><span class=cl><span class=k>WHERE</span> <span class=p>{</span>
+</span></span><span class=line><span class=ln>10</span><span class=cl>  <span class=c># &#34;日本のアニメおよび漫画&#34; の下位クラス</span>
+</span></span><span class=line><span class=ln>11</span><span class=cl>  <span class=c># &#34;日本のアニメおよび漫画&#34; の一部分であるクラス</span>
+</span></span><span class=line><span class=ln>12</span><span class=cl>  <span class=c># &#34;日本のアニメおよび漫画&#34; の一部分であるクラスの下位クラス</span>
+</span></span><span class=line><span class=ln>13</span><span class=cl>  <span class=nv>?entity</span> <span class=nn>wdt</span><span class=p>:</span><span class=nt>P279</span><span class=o>*/</span><span class=nn>wdt</span><span class=p>:</span><span class=nt>P361</span><span class=o>*</span> <span class=nn>wd</span><span class=p>:</span><span class=nt>Q10901350</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>14</span><span class=cl>  <span class=k>SERVICE</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>label</span> <span class=p>{</span> <span class=nn>bd</span><span class=p>:</span><span class=nt>serviceParam</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>language</span> <span class=s>&#34;[AUTO_LANGUAGE],ja,en&#34;</span><span class=p>.</span> <span class=p>}</span>
+</span></span><span class=line><span class=ln>15</span><span class=cl><span class=p>}</span></span></span></code></pre></div><a class=book-btn onclick='setYasguiQuery("wikidata","作品の多言語のタイトルを取得する",`PREFIX bd: \u003chttp://www.bigdata.com/rdf#\u003e
+PREFIX wikibase: \u003chttp://wikiba.se/ontology#\u003e
+PREFIX wd: \u003chttp://www.wikidata.org/entity/\u003e
+PREFIX wdt: \u003chttp://www.wikidata.org/prop/direct/\u003e
+PREFIX xsd: \u003chttp://www.w3.org/2001/XMLSchema#\u003e
+
+SELECT
+  ?entity ?entityLabel
+WHERE {
+  # \u0022日本のアニメおよび漫画\u0022 の下位クラス
+  # \u0022日本のアニメおよび漫画\u0022 の一部分であるクラス
+  # \u0022日本のアニメおよび漫画\u0022 の一部分であるクラスの下位クラス
+  ?entity wdt:P279*/wdt:P361* wd:Q10901350 .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language \u0022[AUTO_LANGUAGE],ja,en\u0022. }
+}`,""),location.href="#yasgui-wikidata"'>▶ 実行する</a><h2 id=文化芸術系に関係のあるプロパティ>文化・芸術系に関係のあるプロパティ
+<a class=anchor href=#%e6%96%87%e5%8c%96%e8%8a%b8%e8%a1%93%e7%b3%bb%e3%81%ab%e9%96%a2%e4%bf%82%e3%81%ae%e3%81%82%e3%82%8b%e3%83%97%e3%83%ad%e3%83%91%e3%83%86%e3%82%a3>#</a></h2><ul><li><a href=https://www.wikidata.org/wiki/Wikidata:List_of_properties/art>Wikidata:List of properties/art</a></li><li><a href=https://www.wikidata.org/wiki/Q27918607>美術関連プロパティ (Q27918607)</a></li></ul><h3 id=メディア芸術データベースとのリンク>メディア芸術データベースとのリンク
+<a class=anchor href=#%e3%83%a1%e3%83%87%e3%82%a3%e3%82%a2%e8%8a%b8%e8%a1%93%e3%83%87%e3%83%bc%e3%82%bf%e3%83%99%e3%83%bc%e3%82%b9%e3%81%a8%e3%81%ae%e3%83%aa%e3%83%b3%e3%82%af>#</a></h3><ul><li><a href=https://www.wikidata.org/wiki/Property:P7886>P7886 (メディア芸術データベース識別子)</a></li></ul><h4 id=使用例>使用例
+<a class=anchor href=#%e4%bd%bf%e7%94%a8%e4%be%8b>#</a></h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-sparql data-lang=sparql><span class=line><span class=ln> 1</span><span class=cl><span class=k>PREFIX</span> <span class=nn>bd</span><span class=p>:</span> <span class=nl>&lt;http://www.bigdata.com/rdf#&gt;</span>
+</span></span><span class=line><span class=ln> 2</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wikibase</span><span class=p>:</span> <span class=nl>&lt;http://wikiba.se/ontology#&gt;</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wd</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/entity/&gt;</span>
+</span></span><span class=line><span class=ln> 4</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wdt</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/prop/direct/&gt;</span>
+</span></span><span class=line><span class=ln> 5</span><span class=cl><span class=k>PREFIX</span> <span class=nn>xsd</span><span class=p>:</span> <span class=nl>&lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>
+</span></span><span class=line><span class=ln> 7</span><span class=cl><span class=k>SELECT</span> <span class=nv>?item</span> <span class=nv>?itemLabel</span> <span class=nv>?value</span>
+</span></span><span class=line><span class=ln> 8</span><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=ln> 9</span><span class=cl>  <span class=nv>?item</span> <span class=nn>wdt</span><span class=p>:</span><span class=nt>P7886</span> <span class=nv>?value</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>10</span><span class=cl>  <span class=k>SERVICE</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>label</span> <span class=p>{</span> <span class=nn>bd</span><span class=p>:</span><span class=nt>serviceParam</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>language</span> <span class=s>&#34;ja,en&#34;</span>  <span class=p>}</span>
+</span></span><span class=line><span class=ln>11</span><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=ln>12</span><span class=cl><span class=k>LIMIT</span> <span class=mi>1000</span></span></span></code></pre></div><a class=book-btn onclick='setYasguiQuery("wikidata","メディア芸術データベース識別子の使用例",`PREFIX bd: \u003chttp://www.bigdata.com/rdf#\u003e
+PREFIX wikibase: \u003chttp://wikiba.se/ontology#\u003e
+PREFIX wd: \u003chttp://www.wikidata.org/entity/\u003e
+PREFIX wdt: \u003chttp://www.wikidata.org/prop/direct/\u003e
+PREFIX xsd: \u003chttp://www.w3.org/2001/XMLSchema#\u003e
+
+SELECT ?item ?itemLabel ?value
+{
+  ?item wdt:P7886 ?value .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language \u0022ja,en\u0022  }
+}
+LIMIT 1000`,""),location.href="#yasgui-wikidata"'>▶ 実行する</a><h4 id=クラスごとの使用数>クラスごとの使用数
+<a class=anchor href=#%e3%82%af%e3%83%a9%e3%82%b9%e3%81%94%e3%81%a8%e3%81%ae%e4%bd%bf%e7%94%a8%e6%95%b0>#</a></h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-sparql data-lang=sparql><span class=line><span class=ln> 1</span><span class=cl><span class=k>PREFIX</span> <span class=nn>bd</span><span class=p>:</span> <span class=nl>&lt;http://www.bigdata.com/rdf#&gt;</span>
+</span></span><span class=line><span class=ln> 2</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wikibase</span><span class=p>:</span> <span class=nl>&lt;http://wikiba.se/ontology#&gt;</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wd</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/entity/&gt;</span>
+</span></span><span class=line><span class=ln> 4</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wdt</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/prop/direct/&gt;</span>
+</span></span><span class=line><span class=ln> 5</span><span class=cl><span class=k>PREFIX</span> <span class=nn>xsd</span><span class=p>:</span> <span class=nl>&lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>
+</span></span><span class=line><span class=ln> 7</span><span class=cl><span class=c>#top 50 for P31 and P279 of items using P7886</span>
+</span></span><span class=line><span class=ln> 8</span><span class=cl><span class=k>SELECT</span> <span class=nv>?class</span> <span class=nv>?classLabel</span> <span class=nv>?count</span> <span class=nv>?use_as_Label</span>
+</span></span><span class=line><span class=ln> 9</span><span class=cl><span class=p>{</span>  <span class=p>{</span>  <span class=k>SELECT</span> <span class=nv>?class</span> <span class=p>(</span><span class=nf>COUNT</span><span class=p>(</span><span class=o>*</span><span class=p>)</span> <span class=k>AS</span> <span class=nv>?count</span><span class=p>)</span> <span class=p>(</span><span class=nn>wd</span><span class=p>:</span><span class=nt>P31</span> <span class=k>as</span> <span class=nv>?use_as_</span><span class=p>)</span>
+</span></span><span class=line><span class=ln>10</span><span class=cl>    <span class=p>{</span>  <span class=nv>?a</span>  <span class=nn>wdt</span><span class=p>:</span><span class=nt>P7886</span>  <span class=nv>?p</span>  <span class=p>;</span> <span class=nn>wdt</span><span class=p>:</span><span class=nt>P31</span>  <span class=nv>?class</span><span class=p>}</span>
+</span></span><span class=line><span class=ln>11</span><span class=cl>        <span class=k>GROUP BY</span> <span class=nv>?class</span> <span class=k>ORDER BY</span> <span class=k>DESC</span><span class=p>(</span><span class=nv>?count</span><span class=p>)</span> <span class=k>LIMIT</span> <span class=mi>50</span>
+</span></span><span class=line><span class=ln>12</span><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=ln>13</span><span class=cl>    <span class=k>UNION</span>
+</span></span><span class=line><span class=ln>14</span><span class=cl>  <span class=p>{</span>  <span class=k>SELECT</span> <span class=nv>?class</span> <span class=p>(</span><span class=nf>COUNT</span><span class=p>(</span><span class=o>*</span><span class=p>)</span> <span class=k>AS</span> <span class=nv>?count</span><span class=p>)</span> <span class=p>(</span><span class=nn>wd</span><span class=p>:</span><span class=nt>P279</span> <span class=k>as</span> <span class=nv>?use_as_</span><span class=p>)</span>
+</span></span><span class=line><span class=ln>15</span><span class=cl>    <span class=p>{</span>  <span class=nv>?a</span>  <span class=nn>wdt</span><span class=p>:</span><span class=nt>P7886</span>  <span class=nv>?p</span>  <span class=p>;</span> <span class=nn>wdt</span><span class=p>:</span><span class=nt>P279</span>  <span class=nv>?class</span><span class=p>}</span>
+</span></span><span class=line><span class=ln>16</span><span class=cl>        <span class=k>GROUP BY</span> <span class=nv>?class</span> <span class=k>ORDER BY</span> <span class=k>DESC</span><span class=p>(</span><span class=nv>?count</span><span class=p>)</span> <span class=k>LIMIT</span> <span class=mi>50</span>
+</span></span><span class=line><span class=ln>17</span><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=ln>18</span><span class=cl>    <span class=k>SERVICE</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>label</span> <span class=p>{</span> <span class=nn>bd</span><span class=p>:</span><span class=nt>serviceParam</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>language</span> <span class=s>&#34;ja,en&#34;</span> <span class=p>}</span>
+</span></span><span class=line><span class=ln>19</span><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=ln>20</span><span class=cl><span class=k>ORDER BY</span> <span class=k>DESC</span><span class=p>(</span><span class=nv>?count</span><span class=p>)</span> <span class=nv>?class</span></span></span></code></pre></div><a class=book-btn onclick='setYasguiQuery("wikidata","メディア芸術データベース識別子のクラスごとの使用数",`PREFIX bd: \u003chttp://www.bigdata.com/rdf#\u003e
+PREFIX wikibase: \u003chttp://wikiba.se/ontology#\u003e
+PREFIX wd: \u003chttp://www.wikidata.org/entity/\u003e
+PREFIX wdt: \u003chttp://www.wikidata.org/prop/direct/\u003e
+PREFIX xsd: \u003chttp://www.w3.org/2001/XMLSchema#\u003e
+
+#top 50 for P31 and P279 of items using P7886
+SELECT ?class ?classLabel ?count ?use_as_Label
+{  {  SELECT ?class (COUNT(*) AS ?count) (wd:P31 as ?use_as_)
+    {  ?a  wdt:P7886  ?p  ; wdt:P31  ?class}
+        GROUP BY ?class ORDER BY DESC(?count) LIMIT 50
+    }
+    UNION
+  {  SELECT ?class (COUNT(*) AS ?count) (wd:P279 as ?use_as_)
+    {  ?a  wdt:P7886  ?p  ; wdt:P279  ?class}
+        GROUP BY ?class ORDER BY DESC(?count) LIMIT 50
+    }
+    SERVICE wikibase:label { bd:serviceParam wikibase:language \u0022ja,en\u0022 }
+}
+ORDER BY DESC(?count) ?class`,""),location.href="#yasgui-wikidata"'>▶ 実行する</a><h2 id=クエリ例>クエリ例
+<a class=anchor href=#%e3%82%af%e3%82%a8%e3%83%aa%e4%be%8b>#</a></h2><h3 id=japanese-movies-released-2020>2020年に公開された邦画
+<a class=anchor href=#japanese-movies-released-2020>#</a></h3><ul><li><a href=https://www.wikidata.org/wiki/Property:P31>P31 (分類, instance of)</a></li><li><a href=https://www.wikidata.org/wiki/Property:P495>P495 (本国)</a></li><li><a href=https://www.wikidata.org/wiki/Property:P577>P577 (出版日)</a></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-sparql data-lang=sparql><span class=line><span class=ln> 1</span><span class=cl><span class=k>PREFIX</span> <span class=nn>bd</span><span class=p>:</span> <span class=nl>&lt;http://www.bigdata.com/rdf#&gt;</span>
+</span></span><span class=line><span class=ln> 2</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wikibase</span><span class=p>:</span> <span class=nl>&lt;http://wikiba.se/ontology#&gt;</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wd</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/entity/&gt;</span>
+</span></span><span class=line><span class=ln> 4</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wdt</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/prop/direct/&gt;</span>
+</span></span><span class=line><span class=ln> 5</span><span class=cl><span class=k>PREFIX</span> <span class=nn>xsd</span><span class=p>:</span> <span class=nl>&lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>
+</span></span><span class=line><span class=ln> 7</span><span class=cl><span class=k>SELECT</span> <span class=k>DISTINCT</span> <span class=nv>?item</span> <span class=nv>?itemLabel</span>
+</span></span><span class=line><span class=ln> 8</span><span class=cl><span class=k>WHERE</span> <span class=p>{</span>
+</span></span><span class=line><span class=ln> 9</span><span class=cl>  <span class=nv>?item</span> <span class=nn>wdt</span><span class=p>:</span><span class=nt>P31</span> <span class=nn>wd</span><span class=p>:</span><span class=nt>Q11424</span> <span class=p>;</span> <span class=c># 映画</span>
+</span></span><span class=line><span class=ln>10</span><span class=cl>        <span class=nn>wdt</span><span class=p>:</span><span class=nt>P495</span> <span class=nn>wd</span><span class=p>:</span><span class=nt>Q17</span> <span class=p>;</span> <span class=c># 日本</span>
+</span></span><span class=line><span class=ln>11</span><span class=cl>        <span class=nn>wdt</span><span class=p>:</span><span class=nt>P577</span> <span class=nv>?pubdate</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>12</span><span class=cl>  <span class=k>FILTER</span><span class=p>((</span><span class=nv>?pubdate</span> <span class=o>&gt;=</span> <span class=s>&#34;2020-01-01T00:00:00Z&#34;</span><span class=o>^^</span><span class=nn>xsd</span><span class=p>:</span><span class=nt>dateTime</span><span class=p>)</span> <span class=o>&amp;&amp;</span> <span class=p>(</span><span class=nv>?pubdate</span> <span class=o>&lt;=</span> <span class=s>&#34;2020-12-31T00:00:00Z&#34;</span><span class=o>^^</span><span class=nn>xsd</span><span class=p>:</span><span class=nt>dateTime</span><span class=p>))</span>
+</span></span><span class=line><span class=ln>13</span><span class=cl>  <span class=k>SERVICE</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>label</span> <span class=p>{</span> <span class=nn>bd</span><span class=p>:</span><span class=nt>serviceParam</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>language</span> <span class=s>&#34;[AUTO_LANGUAGE],ja,en&#34;</span><span class=p>.</span> <span class=p>}</span>
+</span></span><span class=line><span class=ln>14</span><span class=cl><span class=p>}</span></span></span></code></pre></div><a class=book-btn onclick='setYasguiQuery("wikidata","2020年に公開された邦画",`PREFIX bd: \u003chttp://www.bigdata.com/rdf#\u003e
+PREFIX wikibase: \u003chttp://wikiba.se/ontology#\u003e
+PREFIX wd: \u003chttp://www.wikidata.org/entity/\u003e
+PREFIX wdt: \u003chttp://www.wikidata.org/prop/direct/\u003e
+PREFIX xsd: \u003chttp://www.w3.org/2001/XMLSchema#\u003e
+
+SELECT DISTINCT ?item ?itemLabel
+WHERE {
+  ?item wdt:P31 wd:Q11424 ; # 映画
+        wdt:P495 wd:Q17 ; # 日本
+        wdt:P577 ?pubdate .
+  FILTER((?pubdate \u003e= \u00222020-01-01T00:00:00Z\u0022^^xsd:dateTime) \u0026\u0026 (?pubdate \u003c= \u00222020-12-31T00:00:00Z\u0022^^xsd:dateTime))
+  SERVICE wikibase:label { bd:serviceParam wikibase:language \u0022[AUTO_LANGUAGE],ja,en\u0022. }
+}`,""),location.href="#yasgui-wikidata"'>▶ 実行する</a><h3 id=love-comedy-lightnovel>SFライトノベル
+<a class=anchor href=#love-comedy-lightnovel>#</a></h3><ul><li><a href=https://www.wikidata.org/wiki/Property:P31>P31 (分類, instance of)</a></li><li><a href=https://www.wikidata.org/wiki/Property:P279>P279 (上位クラス)</a></li><li><a href=https://www.wikidata.org/wiki/Property:P136>P136 (ジャンル)</a></li><li><a href=https://www.wikidata.org/wiki/Q747381>Q747381 (ライトノベル)</a></li><li><a href=https://www.wikidata.org/wiki/Q9326077>Q9326077 (スペキュレイティブ・フィクション )</a></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-sparql data-lang=sparql><span class=line><span class=ln> 1</span><span class=cl><span class=k>PREFIX</span> <span class=nn>bd</span><span class=p>:</span> <span class=nl>&lt;http://www.bigdata.com/rdf#&gt;</span>
+</span></span><span class=line><span class=ln> 2</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wikibase</span><span class=p>:</span> <span class=nl>&lt;http://wikiba.se/ontology#&gt;</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wd</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/entity/&gt;</span>
+</span></span><span class=line><span class=ln> 4</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wdt</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/prop/direct/&gt;</span>
+</span></span><span class=line><span class=ln> 5</span><span class=cl><span class=k>PREFIX</span> <span class=nn>xsd</span><span class=p>:</span> <span class=nl>&lt;http://www.w3.org/2001/XMLSchema#&gt;</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>
+</span></span><span class=line><span class=ln> 7</span><span class=cl><span class=k>SELECT</span> <span class=k>DISTINCT</span> <span class=nv>?item</span> <span class=nv>?itemLabel</span>
+</span></span><span class=line><span class=ln> 8</span><span class=cl><span class=k>WHERE</span> <span class=p>{</span>
+</span></span><span class=line><span class=ln> 9</span><span class=cl>  <span class=nv>?item</span> <span class=nn>wdt</span><span class=p>:</span><span class=nt>P31</span><span class=o>/</span><span class=nn>wdt</span><span class=p>:</span><span class=nt>P279</span><span class=o>*</span> <span class=nn>wd</span><span class=p>:</span><span class=nt>Q747381</span> <span class=p>;</span> <span class=c># ライトノベル</span>
+</span></span><span class=line><span class=ln>10</span><span class=cl>        <span class=nn>wdt</span><span class=p>:</span><span class=nt>P136</span><span class=o>/</span><span class=nn>wdt</span><span class=p>:</span><span class=nt>P279</span><span class=o>*</span> <span class=nn>wd</span><span class=p>:</span><span class=nt>Q9326077</span> <span class=p>.</span> <span class=c># スペキュレイティブ・フィクション </span>
+</span></span><span class=line><span class=ln>11</span><span class=cl>  <span class=k>SERVICE</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>label</span> <span class=p>{</span> <span class=nn>bd</span><span class=p>:</span><span class=nt>serviceParam</span> <span class=nn>wikibase</span><span class=p>:</span><span class=nt>language</span> <span class=s>&#34;[AUTO_LANGUAGE],ja,en&#34;</span><span class=p>.</span> <span class=p>}</span>
+</span></span><span class=line><span class=ln>12</span><span class=cl><span class=p>}</span></span></span></code></pre></div><a class=book-btn onclick='setYasguiQuery("wikidata","SFライトノベル",`PREFIX bd: \u003chttp://www.bigdata.com/rdf#\u003e
+PREFIX wikibase: \u003chttp://wikiba.se/ontology#\u003e
+PREFIX wd: \u003chttp://www.wikidata.org/entity/\u003e
+PREFIX wdt: \u003chttp://www.wikidata.org/prop/direct/\u003e
+PREFIX xsd: \u003chttp://www.w3.org/2001/XMLSchema#\u003e
+
+SELECT DISTINCT ?item ?itemLabel
+WHERE {
+  ?item wdt:P31/wdt:P279* wd:Q747381 ; # ライトノベル
+        wdt:P136/wdt:P279* wd:Q9326077 . # スペキュレイティブ・フィクション 
+  SERVICE wikibase:label { bd:serviceParam wikibase:language \u0022[AUTO_LANGUAGE],ja,en\u0022. }
+}`,""),location.href="#yasgui-wikidata"'>▶ 実行する</a></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Babibubebon/lodc2022-culture-art/edit/master/content/docs/wikidata.md target=_blank rel=noopener><img src=/svg/edit.svg class=book-icon alt=Edit>
+<span>Edit this page</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script><hr><a rel=license href=http://creativecommons.org/licenses/by-sa/4.0/ style=float:left><img alt=クリエイティブ・コモンズ・ライセンス style=border-width:0;width:88px;height:31px src=https://i.creativecommons.org/l/by-sa/4.0/88x31.png></a>
+<small>By Shohei TOYOTA<br>この作品は<a rel=license href=http://creativecommons.org/licenses/by-sa/4.0/>クリエイティブ・コモンズ 表示 - 継承 4.0 国際ライセンス</a>の下に提供されています。</small></footer><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#query-editor>SPARQLクエリエディタ</a></li><li><a href=#文化芸術系に関係のあるクラス>文化・芸術系に関係のあるクラス</a><ul><li><a href=#芸術作品-の下位クラスを探す>&ldquo;芸術作品&rdquo; の下位クラスを探す</a></li><li><a href=#日本のアニメおよび漫画-の一部分下位クラスを探す>&ldquo;日本のアニメおよび漫画&rdquo; の一部分・下位クラスを探す</a></li></ul></li><li><a href=#文化芸術系に関係のあるプロパティ>文化・芸術系に関係のあるプロパティ</a><ul><li><a href=#メディア芸術データベースとのリンク>メディア芸術データベースとのリンク</a></li></ul></li><li><a href=#クエリ例>クエリ例</a><ul><li><a href=#japanese-movies-released-2020>2020年に公開された邦画</a></li><li><a href=#love-comedy-lightnovel>SFライトノベル</a></li></ul></li></ul></nav></div></aside></main></body></html>

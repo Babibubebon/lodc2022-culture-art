@@ -7,12 +7,12 @@ federatedクエリを利用したクエリを紹介します。
 SPARQLクエリエディタ # クエリ集 # 作品の多言語のタイトルを取得する # https://mediaarts-db.bunka.go.jp/id/C413599
 P7886(メディア芸術データベース識別子)
 1PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 2PREFIX schema: <https://schema.org/> 3PREFIX ma: <https://mediaarts-db.bunka.go.jp/data/property#> 4PREFIX wdt: <http://www.wikidata.org/prop/direct/> 5 6SELECT 7 ?MADBLabel ?label (LANG(?label) AS ?lang) ?wikidataEntity 8WHERE { 9 <https://mediaarts-db.bunka.go.jp/id/C413599> 10 schema:identifier ?MADBID ; 11 rdfs:label ?MADBLabel . 12 # Wikidataへクエリ 13 SERVICE <https://query.wikidata.org/sparql> { 14 # P7886: メディア芸術データベース識別子 15 ?wikidataEntity wdt:P7886 ?MADBID ; 16 rdfs:label ?label . 17 } 18} ▶ 実行する メディア芸術データベースの責任主体の法人番号を取得する # Wikidataとメディア芸術データベースを連携したfederatedクエリ"><meta property="og:type" content="article"><meta property="og:url" content="https://lodc2022-culture-art.metadata.moe/docs/federated_query/"><meta property="article:section" content="docs"><title>複数エンドポイントの横断的活用 | 文化・芸術とLOD ハンズオン</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.d2a9252a1314abcda8c9cb0a0a7d95cb478b6ca9a60573f18956a6bd4197eb1d.css integrity="sha256-0qklKhMUq82oycsKCn2Vy0eLbKmmBXPxiVamvUGX6x0=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script>
-<script defer src=/en.search.min.7992a42c8618a62d941d938684429ef70361db322bbfb36056b51a5f1c14bc5f.js integrity="sha256-eZKkLIYYpi2UHZOGhEKe9wNh2zIrv7NgVrUaXxwUvF8=" crossorigin=anonymous></script>
+<script defer src=/en.search.min.78be5f4560bd4a932b887bf7ca42354455930af6a226caa30106d48f9fd189b1.js integrity="sha256-eL5fRWC9SpMriHv3ykI1RFWTCvaiJsqjAQbUj5/RibE=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@triply/yasgui@4.2.27/build/yasgui.min.css><script src=https://cdn.jsdelivr.net/npm/@triply/yasgui@4.2.27/build/yasgui.min.js></script>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/codemirror@5.65.8/theme/dracula.css><script>const yasgui={};function setYasguiQuery(e,t,n,s){let i=yasgui[e],o=i.getTab(t);o||(o=i.addTab(!0,{...Yasgui.Tab.getDefaults(),requestConfig:s?{endpoint:s}:i.config.requestConfig,name:t,id:t}));try{o.setQuery(n)}catch{o.close(),o=i.addTab(!0,{...Yasgui.Tab.getDefaults(),requestConfig:s?{endpoint:s}:i.config.requestConfig,name:t,id:t})}o.yasqe.query()}</script><style>.yasr table.dataTable{max-width:100%}.yasr table.dataTable tbody td{padding:2px 4px;font-size:90%}</style></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>文化・芸術とLOD ハンズオン</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/docs/start/>はじめに</a></li><li><a href=/docs/mediaartsdb/>メディア芸術データベース</a></li><li><a href=/docs/federated_query/ class=active>複数エンドポイントの横断的活用</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>文化・芸術とLOD ハンズオン</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/docs/start/>はじめに</a></li><li><a href=/docs/mediaartsdb/>メディア芸術データベース</a></li><li><a href=/docs/wikidata/>Wikidata</a></li><li><a href=/docs/federated_query/ class=active>複数エンドポイントの横断的活用</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>複数エンドポイントの横断的活用</strong>
-<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#query-editor>SPARQLクエリエディタ</a></li><li><a href=#queries>クエリ集</a><ul><li><a href=#multilingual-titles>作品の多言語のタイトルを取得する</a></li><li><a href=#agent-houjin-bangou>メディア芸術データベースの責任主体の法人番号を取得する</a></li><li><a href=#japan-game-awards>「日本ゲーム大賞」を受賞したゲームを取得する</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1 id=複数エンドポイントの横断的活用>複数エンドポイントの横断的活用
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#query-editor>SPARQLクエリエディタ</a></li><li><a href=#queries>クエリ集</a><ul><li><a href=#multilingual-titles>作品の多言語のタイトルを取得する</a></li><li><a href=#agent-houjin-bangou>メディア芸術データベースの責任主体の法人番号を取得する</a></li><li><a href=#japan-game-awards>「日本ゲーム大賞」を受賞したゲームを取得する</a></li><li><a href=#タイムトラベルを題材とした作品を取得する>「タイムトラベルを題材とした作品」を取得する</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1 id=複数エンドポイントの横断的活用>複数エンドポイントの横断的活用
 <a class=anchor href=#%e8%a4%87%e6%95%b0%e3%82%a8%e3%83%b3%e3%83%89%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88%e3%81%ae%e6%a8%aa%e6%96%ad%e7%9a%84%e6%b4%bb%e7%94%a8>#</a></h1><p>SPARQLでは、1つのエンドポイントだけでなく、外部の複数のエンドポイントに対してクエリを実行することができる<a href=https://www.w3.org/TR/2013/REC-sparql11-federated-query-20130321/><strong>federatedクエリ</strong></a>という仕組みがあります。</p><p>federatedクエリを利用したクエリを紹介します。</p><h2 id=query-editor>SPARQLクエリエディタ
 <a class=anchor href=#query-editor>#</a></h2><div><div id=yasgui-federated></div></div><script>yasgui.federated=new Yasgui(document.getElementById("yasgui-federated"),{requestConfig:{endpoint:""},persistenceId:"federated",autofocus:!1,copyEndpointOnNewTab:!1,yasqe:{theme:"dracula"}})</script><style></style><hr><h2 id=queries>クエリ集
 <a class=anchor href=#queries>#</a></h2><h3 id=multilingual-titles>作品の多言語のタイトルを取得する
@@ -112,23 +112,24 @@ LIMIT 100`,"https://mediag.bunka.go.jp/sparql"),location.href="#yasgui-federated
 </span></span><span class=line><span class=ln>18</span><span class=cl>      <span class=p>(</span><span class=nf>URI</span><span class=p>(</span><span class=nf>REPLACE</span><span class=p>(</span><span class=nf>STR</span><span class=p>(</span><span class=nv>?wikidataEntity</span><span class=p>),</span> <span class=s>&#34;http://wikidata.dbpedia.org/resource/&#34;</span><span class=p>,</span> <span class=s>&#34;http://www.wikidata.org/entity/&#34;</span><span class=p>))</span>
 </span></span><span class=line><span class=ln>19</span><span class=cl>        <span class=k>AS</span> <span class=nv>?wikidataEntity</span><span class=p>)</span>
 </span></span><span class=line><span class=ln>20</span><span class=cl>    <span class=p>{</span>
-</span></span><span class=line><span class=ln>21</span><span class=cl>      <span class=nl>&lt;http://ja.dbpedia.org/resource/Category:日本ゲーム大賞受賞ソフト&gt;</span> <span class=p>^</span><span class=nn>skos</span><span class=p>:</span><span class=nt>broader</span><span class=o>*</span> <span class=nv>?category</span> <span class=p>.</span>
-</span></span><span class=line><span class=ln>22</span><span class=cl>      <span class=nv>?dbpediaEntity</span> <span class=nn>dcterms</span><span class=p>:</span><span class=nt>subject</span> <span class=nv>?category</span><span class=p>;</span>
-</span></span><span class=line><span class=ln>23</span><span class=cl>                     <span class=p>^</span><span class=nn>owl</span><span class=p>:</span><span class=nt>sameAs</span> <span class=nv>?wikidataEntity</span> <span class=p>.</span>
-</span></span><span class=line><span class=ln>24</span><span class=cl>      <span class=k>FILTER</span><span class=p>(</span><span class=nf>STRSTARTS</span><span class=p>(</span><span class=nf>STR</span><span class=p>(</span><span class=nv>?wikidataEntity</span><span class=p>),</span> <span class=s>&#34;http://wikidata.dbpedia.org/resource/&#34;</span><span class=p>))</span>
-</span></span><span class=line><span class=ln>25</span><span class=cl>    <span class=p>}</span>
-</span></span><span class=line><span class=ln>26</span><span class=cl>  <span class=p>}</span>
-</span></span><span class=line><span class=ln>27</span><span class=cl>  <span class=c># Wikidata</span>
-</span></span><span class=line><span class=ln>28</span><span class=cl>  <span class=k>SERVICE</span> <span class=nl>&lt;https://query.wikidata.org/sparql&gt;</span> <span class=p>{</span>
-</span></span><span class=line><span class=ln>29</span><span class=cl>    <span class=c># P7886: メディア芸術データベース識別子</span>
-</span></span><span class=line><span class=ln>30</span><span class=cl>    <span class=nv>?wikidataEntity</span> <span class=nn>wdt</span><span class=p>:</span><span class=nt>P7886</span> <span class=nv>?MADBID</span> <span class=p>.</span>
-</span></span><span class=line><span class=ln>31</span><span class=cl>  <span class=p>}</span>
-</span></span><span class=line><span class=ln>32</span><span class=cl>  <span class=c># メディア芸術データベース</span>
-</span></span><span class=line><span class=ln>33</span><span class=cl>  <span class=nv>?MADBResource</span> <span class=nn>schema</span><span class=p>:</span><span class=nt>identifier</span> <span class=nv>?MADBID</span> <span class=p>;</span>
-</span></span><span class=line><span class=ln>34</span><span class=cl>            <span class=nn>schema</span><span class=p>:</span><span class=nt>genre</span> <span class=nv>?genre</span> <span class=p>;</span>
-</span></span><span class=line><span class=ln>35</span><span class=cl>            <span class=nn>rdfs</span><span class=p>:</span><span class=nt>label</span> <span class=nv>?label</span> <span class=p>.</span>
-</span></span><span class=line><span class=ln>36</span><span class=cl><span class=p>}</span>
-</span></span><span class=line><span class=ln>37</span><span class=cl><span class=k>LIMIT</span> <span class=mi>100</span></span></span></code></pre></div><a class=book-btn onclick='setYasguiQuery("federated","「日本ゲーム大賞」を受賞したゲームを取得する",`PREFIX rdfs: \u003chttp://www.w3.org/2000/01/rdf-schema#\u003e
+</span></span><span class=line><span class=ln>21</span><span class=cl>      <span class=c># 下位カテゴリを含める</span>
+</span></span><span class=line><span class=ln>22</span><span class=cl>      <span class=nl>&lt;http://ja.dbpedia.org/resource/Category:日本ゲーム大賞受賞ソフト&gt;</span> <span class=p>^</span><span class=nn>skos</span><span class=p>:</span><span class=nt>broader</span><span class=o>*</span> <span class=nv>?category</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>23</span><span class=cl>      <span class=nv>?dbpediaEntity</span> <span class=nn>dcterms</span><span class=p>:</span><span class=nt>subject</span> <span class=nv>?category</span> <span class=p>;</span>
+</span></span><span class=line><span class=ln>24</span><span class=cl>                     <span class=p>^</span><span class=nn>owl</span><span class=p>:</span><span class=nt>sameAs</span> <span class=nv>?wikidataEntity</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>25</span><span class=cl>      <span class=k>FILTER</span><span class=p>(</span><span class=nf>STRSTARTS</span><span class=p>(</span><span class=nf>STR</span><span class=p>(</span><span class=nv>?wikidataEntity</span><span class=p>),</span> <span class=s>&#34;http://wikidata.dbpedia.org/resource/&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=ln>26</span><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=ln>27</span><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=ln>28</span><span class=cl>  <span class=c># Wikidata</span>
+</span></span><span class=line><span class=ln>29</span><span class=cl>  <span class=k>SERVICE</span> <span class=nl>&lt;https://query.wikidata.org/sparql&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=ln>30</span><span class=cl>    <span class=c># P7886: メディア芸術データベース識別子</span>
+</span></span><span class=line><span class=ln>31</span><span class=cl>    <span class=nv>?wikidataEntity</span> <span class=nn>wdt</span><span class=p>:</span><span class=nt>P7886</span> <span class=nv>?MADBID</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>32</span><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=ln>33</span><span class=cl>  <span class=c># メディア芸術データベース</span>
+</span></span><span class=line><span class=ln>34</span><span class=cl>  <span class=nv>?MADBResource</span> <span class=nn>schema</span><span class=p>:</span><span class=nt>identifier</span> <span class=nv>?MADBID</span> <span class=p>;</span>
+</span></span><span class=line><span class=ln>35</span><span class=cl>            <span class=nn>schema</span><span class=p>:</span><span class=nt>genre</span> <span class=nv>?genre</span> <span class=p>;</span>
+</span></span><span class=line><span class=ln>36</span><span class=cl>            <span class=nn>rdfs</span><span class=p>:</span><span class=nt>label</span> <span class=nv>?label</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>37</span><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=ln>38</span><span class=cl><span class=k>LIMIT</span> <span class=mi>100</span></span></span></code></pre></div><a class=book-btn onclick='setYasguiQuery("federated","「日本ゲーム大賞」を受賞したゲームを取得する",`PREFIX rdfs: \u003chttp://www.w3.org/2000/01/rdf-schema#\u003e
 PREFIX owl: \u003chttp://www.w3.org/2002/07/owl#\u003e
 PREFIX dcterms: \u003chttp://purl.org/dc/terms/\u003e
 PREFIX schema: \u003chttps://schema.org/\u003e
@@ -148,8 +149,9 @@ WHERE {
       (URI(REPLACE(STR(?wikidataEntity), \u0022http://wikidata.dbpedia.org/resource/\u0022, \u0022http://www.wikidata.org/entity/\u0022))
         AS ?wikidataEntity)
     {
+      # 下位カテゴリを含める
       \u003chttp://ja.dbpedia.org/resource/Category:日本ゲーム大賞受賞ソフト\u003e ^skos:broader* ?category .
-      ?dbpediaEntity dcterms:subject ?category;
+      ?dbpediaEntity dcterms:subject ?category ;
                      ^owl:sameAs ?wikidataEntity .
       FILTER(STRSTARTS(STR(?wikidataEntity), \u0022http://wikidata.dbpedia.org/resource/\u0022))
     }
@@ -164,6 +166,73 @@ WHERE {
             schema:genre ?genre ;
             rdfs:label ?label .
 }
-LIMIT 100`,"https://mediag.bunka.go.jp/sparql"),location.href="#yasgui-federated"'>▶ 実行する</a><blockquote class="book-hint info"><p>federatedクエリの実行順序によっては、正しく結果が得られないことがあります。</p><p>RDFストアによっては、クエリオプティマイザに実行順序を指示する方法が用意されており、メディア芸術データベースのSPARQLクエリサービスが使用しているAmazon Neptuneでは <code>hint:Query hint:joinOrder "Ordered" .</code> というパターンを記述します。</p><p>参照: <a href=https://docs.aws.amazon.com/ja_jp/neptune/latest/userguide/sparql-query-hints.html>Amazon Neptune: SPARQL クエリヒント</a></p></blockquote></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Babibubebon/lodc2022-culture-art/edit/master/content/docs/federated_query.md target=_blank rel=noopener><img src=/svg/edit.svg class=book-icon alt=Edit>
+LIMIT 100`,"https://mediag.bunka.go.jp/sparql"),location.href="#yasgui-federated"'>▶ 実行する</a><blockquote class="book-hint info"><p>federatedクエリの実行順序によっては、正しく結果が得られないことがあります。</p><p>RDFストアによっては、クエリオプティマイザに実行順序を指示する方法が用意されており、メディア芸術データベースのSPARQLクエリサービスが使用しているAmazon Neptuneでは <code>hint:Query hint:joinOrder "Ordered" .</code> というパターンを記述します。</p><p>参照: <a href=https://docs.aws.amazon.com/ja_jp/neptune/latest/userguide/sparql-query-hints.html>Amazon Neptune: SPARQL クエリヒント</a></p></blockquote><h3 id=タイムトラベルを題材とした作品を取得する>「タイムトラベルを題材とした作品」を取得する
+<a class=anchor href=#%e3%82%bf%e3%82%a4%e3%83%a0%e3%83%88%e3%83%a9%e3%83%99%e3%83%ab%e3%82%92%e9%a1%8c%e6%9d%90%e3%81%a8%e3%81%97%e3%81%9f%e4%bd%9c%e5%93%81%e3%82%92%e5%8f%96%e5%be%97%e3%81%99%e3%82%8b>#</a></h3><p>DBpedia JapaneseとWikidataとメディア芸術データベースを連携したfederatedクエリ</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sparql data-lang=sparql><span class=line><span class=ln> 1</span><span class=cl><span class=k>PREFIX</span> <span class=nn>rdfs</span><span class=p>:</span> <span class=nl>&lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+</span></span><span class=line><span class=ln> 2</span><span class=cl><span class=k>PREFIX</span> <span class=nn>owl</span><span class=p>:</span> <span class=nl>&lt;http://www.w3.org/2002/07/owl#&gt;</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl><span class=k>PREFIX</span> <span class=nn>dcterms</span><span class=p>:</span> <span class=nl>&lt;http://purl.org/dc/terms/&gt;</span>
+</span></span><span class=line><span class=ln> 4</span><span class=cl><span class=k>PREFIX</span> <span class=nn>schema</span><span class=p>:</span> <span class=nl>&lt;https://schema.org/&gt;</span>
+</span></span><span class=line><span class=ln> 5</span><span class=cl><span class=k>PREFIX</span> <span class=nn>skos</span><span class=p>:</span> <span class=nl>&lt;http://www.w3.org/2004/02/skos/core#&gt;</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl><span class=k>PREFIX</span> <span class=nn>class</span><span class=p>:</span>  <span class=nl>&lt;https://mediaarts-db.bunka.go.jp/data/class#&gt;</span>
+</span></span><span class=line><span class=ln> 7</span><span class=cl><span class=k>PREFIX</span> <span class=nn>ma</span><span class=p>:</span>     <span class=nl>&lt;https://mediaarts-db.bunka.go.jp/data/property#&gt;</span>
+</span></span><span class=line><span class=ln> 8</span><span class=cl><span class=k>PREFIX</span> <span class=nn>wdt</span><span class=p>:</span> <span class=nl>&lt;http://www.wikidata.org/prop/direct/&gt;</span>
+</span></span><span class=line><span class=ln> 9</span><span class=cl><span class=k>PREFIX</span> <span class=nn>hint</span><span class=p>:</span> <span class=nl>&lt;http://aws.amazon.com/neptune/vocab/v01/QueryHints#&gt;</span>
+</span></span><span class=line><span class=ln>10</span><span class=cl>
+</span></span><span class=line><span class=ln>11</span><span class=cl><span class=k>SELECT</span>
+</span></span><span class=line><span class=ln>12</span><span class=cl>  <span class=nv>?MADBID</span> <span class=nv>?genre</span> <span class=nv>?label</span>
+</span></span><span class=line><span class=ln>13</span><span class=cl><span class=k>WHERE</span> <span class=p>{</span>
+</span></span><span class=line><span class=ln>14</span><span class=cl>  <span class=nn>hint</span><span class=p>:</span><span class=nt>Query</span> <span class=nn>hint</span><span class=p>:</span><span class=nt>joinOrder</span> <span class=s>&#34;Ordered&#34;</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>15</span><span class=cl>  <span class=c># DBpedia Japanese</span>
+</span></span><span class=line><span class=ln>16</span><span class=cl>  <span class=k>SERVICE</span> <span class=nl>&lt;https://ja.dbpedia.org/sparql&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=ln>17</span><span class=cl>    <span class=k>SELECT</span> <span class=k>DISTINCT</span> <span class=p>(</span><span class=nf>URI</span><span class=p>(</span><span class=nf>REPLACE</span><span class=p>(</span><span class=nf>STR</span><span class=p>(</span><span class=nv>?wikidataEntity</span><span class=p>),</span> <span class=s>&#34;http://wikidata.dbpedia.org/resource/&#34;</span><span class=p>,</span> <span class=s>&#34;http://www.wikidata.org/entity/&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=ln>18</span><span class=cl>        <span class=k>AS</span> <span class=nv>?wikidataEntity</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=ln>19</span><span class=cl>      <span class=nl>&lt;http://ja.dbpedia.org/resource/Category:タイムトラベルを題材とした作品&gt;</span> <span class=p>^</span><span class=nn>skos</span><span class=p>:</span><span class=nt>broader</span><span class=o>*</span> <span class=nv>?category</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>20</span><span class=cl>      <span class=nv>?dbpediaEntity</span> <span class=nn>dcterms</span><span class=p>:</span><span class=nt>subject</span> <span class=nv>?category</span><span class=p>;</span>
+</span></span><span class=line><span class=ln>21</span><span class=cl>                     <span class=p>^</span><span class=nn>owl</span><span class=p>:</span><span class=nt>sameAs</span> <span class=nv>?wikidataEntity</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>22</span><span class=cl>      <span class=k>FILTER</span><span class=p>(</span><span class=nf>STRSTARTS</span><span class=p>(</span><span class=nf>STR</span><span class=p>(</span><span class=nv>?wikidataEntity</span><span class=p>),</span> <span class=s>&#34;http://wikidata.dbpedia.org/resource/&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=ln>23</span><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=ln>24</span><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=ln>25</span><span class=cl>  <span class=c># Wikidata</span>
+</span></span><span class=line><span class=ln>26</span><span class=cl>  <span class=k>SERVICE</span> <span class=nl>&lt;https://query.wikidata.org/sparql&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=ln>27</span><span class=cl>    <span class=nv>?wikidataEntity</span> <span class=nn>wdt</span><span class=p>:</span><span class=nt>P7886</span> <span class=nv>?MADBID</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>28</span><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=ln>29</span><span class=cl>  <span class=c># メディア芸術データベース</span>
+</span></span><span class=line><span class=ln>30</span><span class=cl>  <span class=nv>?MADBResource</span> <span class=nn>schema</span><span class=p>:</span><span class=nt>identifier</span> <span class=nv>?MADBID</span> <span class=p>;</span>
+</span></span><span class=line><span class=ln>31</span><span class=cl>            <span class=nn>schema</span><span class=p>:</span><span class=nt>genre</span> <span class=nv>?genre</span> <span class=p>;</span>
+</span></span><span class=line><span class=ln>32</span><span class=cl>            <span class=nn>rdfs</span><span class=p>:</span><span class=nt>label</span> <span class=nv>?label</span> <span class=p>.</span>
+</span></span><span class=line><span class=ln>33</span><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=ln>34</span><span class=cl><span class=k>LIMIT</span> <span class=mi>200</span></span></span></code></pre></div><a class=book-btn onclick='setYasguiQuery("federated","「タイムトラベルを題材とした作品」を取得する",`PREFIX rdfs: \u003chttp://www.w3.org/2000/01/rdf-schema#\u003e
+PREFIX owl: \u003chttp://www.w3.org/2002/07/owl#\u003e
+PREFIX dcterms: \u003chttp://purl.org/dc/terms/\u003e
+PREFIX schema: \u003chttps://schema.org/\u003e
+PREFIX skos: \u003chttp://www.w3.org/2004/02/skos/core#\u003e
+PREFIX class:  \u003chttps://mediaarts-db.bunka.go.jp/data/class#\u003e
+PREFIX ma:     \u003chttps://mediaarts-db.bunka.go.jp/data/property#\u003e
+PREFIX wdt: \u003chttp://www.wikidata.org/prop/direct/\u003e
+PREFIX hint: \u003chttp://aws.amazon.com/neptune/vocab/v01/QueryHints#\u003e
+
+SELECT
+  ?MADBID ?genre ?label
+WHERE {
+  hint:Query hint:joinOrder \u0022Ordered\u0022 .
+  # DBpedia Japanese
+  SERVICE \u003chttps://ja.dbpedia.org/sparql\u003e {
+    SELECT DISTINCT (URI(REPLACE(STR(?wikidataEntity), \u0022http://wikidata.dbpedia.org/resource/\u0022, \u0022http://www.wikidata.org/entity/\u0022))
+        AS ?wikidataEntity) {
+      \u003chttp://ja.dbpedia.org/resource/Category:タイムトラベルを題材とした作品\u003e ^skos:broader* ?category .
+      ?dbpediaEntity dcterms:subject ?category;
+                     ^owl:sameAs ?wikidataEntity .
+      FILTER(STRSTARTS(STR(?wikidataEntity), \u0022http://wikidata.dbpedia.org/resource/\u0022))
+    }
+  }
+  # Wikidata
+  SERVICE \u003chttps://query.wikidata.org/sparql\u003e {
+    ?wikidataEntity wdt:P7886 ?MADBID .
+  }
+  # メディア芸術データベース
+  ?MADBResource schema:identifier ?MADBID ;
+            schema:genre ?genre ;
+            rdfs:label ?label .
+}
+LIMIT 200`,"https://mediag.bunka.go.jp/sparql"),location.href="#yasgui-federated"'>▶ 実行する</a><p>Wikipediaのカテゴリは上記のようなクエリで汎用的に使うことができます。</p><p>他にも以下のようなカテゴリを使うことで、いわゆる「聖地」による作品のキュレーションとして活用することができます。</p><ul><li><code>http://ja.dbpedia.org/resource/Category:湘南を舞台とした作品</code></li></ul></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Babibubebon/lodc2022-culture-art/edit/master/content/docs/federated_query.md target=_blank rel=noopener><img src=/svg/edit.svg class=book-icon alt=Edit>
 <span>Edit this page</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script><hr><a rel=license href=http://creativecommons.org/licenses/by-sa/4.0/ style=float:left><img alt=クリエイティブ・コモンズ・ライセンス style=border-width:0;width:88px;height:31px src=https://i.creativecommons.org/l/by-sa/4.0/88x31.png></a>
-<small>By Shohei TOYOTA<br>この作品は<a rel=license href=http://creativecommons.org/licenses/by-sa/4.0/>クリエイティブ・コモンズ 表示 - 継承 4.0 国際ライセンス</a>の下に提供されています。</small></footer><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#query-editor>SPARQLクエリエディタ</a></li><li><a href=#queries>クエリ集</a><ul><li><a href=#multilingual-titles>作品の多言語のタイトルを取得する</a></li><li><a href=#agent-houjin-bangou>メディア芸術データベースの責任主体の法人番号を取得する</a></li><li><a href=#japan-game-awards>「日本ゲーム大賞」を受賞したゲームを取得する</a></li></ul></li></ul></nav></div></aside></main></body></html>
+<small>By Shohei TOYOTA<br>この作品は<a rel=license href=http://creativecommons.org/licenses/by-sa/4.0/>クリエイティブ・コモンズ 表示 - 継承 4.0 国際ライセンス</a>の下に提供されています。</small></footer><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#query-editor>SPARQLクエリエディタ</a></li><li><a href=#queries>クエリ集</a><ul><li><a href=#multilingual-titles>作品の多言語のタイトルを取得する</a></li><li><a href=#agent-houjin-bangou>メディア芸術データベースの責任主体の法人番号を取得する</a></li><li><a href=#japan-game-awards>「日本ゲーム大賞」を受賞したゲームを取得する</a></li><li><a href=#タイムトラベルを題材とした作品を取得する>「タイムトラベルを題材とした作品」を取得する</a></li></ul></li></ul></nav></div></aside></main></body></html>
