@@ -15,7 +15,17 @@
          id: tabName
       });
     }
-    tab.setQuery(query);
+    try {
+      tab.setQuery(query);
+    } catch (error) {
+      tab.close();
+      tab = yasguiInstance.addTab(true, {
+        ...Yasgui.Tab.getDefaults(),
+        requestConfig: endpoint ? {endpoint: endpoint} : yasguiInstance.config.requestConfig,
+        name: tabName,
+        id: tabName
+      });
+    }
     tab.yasqe.query();
   }
 </script>
