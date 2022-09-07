@@ -104,8 +104,9 @@ WHERE {
       (URI(REPLACE(STR(?wikidataEntity), "http://wikidata.dbpedia.org/resource/", "http://www.wikidata.org/entity/"))
         AS ?wikidataEntity)
     {
+      # 下位カテゴリを含める
       <http://ja.dbpedia.org/resource/Category:日本ゲーム大賞受賞ソフト> ^skos:broader* ?category .
-      ?dbpediaEntity dcterms:subject ?category;
+      ?dbpediaEntity dcterms:subject ?category ;
                      ^owl:sameAs ?wikidataEntity .
       FILTER(STRSTARTS(STR(?wikidataEntity), "http://wikidata.dbpedia.org/resource/"))
     }
@@ -130,3 +131,44 @@ RDFストアによっては、クエリオプティマイザに実行順序を�
 
 参照: [Amazon Neptune: SPARQL クエリヒント](https://docs.aws.amazon.com/ja_jp/neptune/latest/userguide/sparql-query-hints.html)
 {{< /hint >}}
+
+
+### 「タイムトラベルを題材とした作品」を取得する
+DBpedia JapaneseとWikidataとメディア芸術データベースを連携したfederatedクエリ
+
+{{< yasgui-query yasgui-id="federated" title="「タイムトラベルを題材とした作品」を取得する" endpoint="https://mediag.bunka.go.jp/sparql" >}}
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX class:  <https://mediaarts-db.bunka.go.jp/data/class#>
+PREFIX ma:     <https://mediaarts-db.bunka.go.jp/data/property#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX hint: <http://aws.amazon.com/neptune/vocab/v01/QueryHints#>
+
+SELECT
+  ?MADBID ?genre ?label
+WHERE {
+  hint:Query hint:joinOrder "Ordered" .
+  # DBpedia Japanese
+  SERVICE <https://ja.dbpedia.org/sparql> {
+    SELECT DISTINCT (URI(REPLACE(STR(?wikidataEntity), "http://wikidata.dbpedia.org/resource/", "http://www.wikidata.org/entity/"))
+        AS ?wikidataEntity) {
+      <http://ja.dbpedia.org/resource/Category:タイムトラベルを題材とした作品> ^skos:broader* ?category .
+      ?dbpediaEntity dcterms:subject ?category;
+                     ^owl:sameAs ?wikidataEntity .
+      FILTER(STRSTARTS(STR(?wikidataEntity), "http://wikidata.dbpedia.org/resource/"))
+    }
+  }
+  # Wikidata
+  SERVICE <https://query.wikidata.org/sparql> {
+    ?wikidataEntity wdt:P7886 ?MADBID .
+  }
+  # メディア芸術データベース
+  ?MADBResource schema:identifier ?MADBID ;
+            schema:genre ?genre ;
+            rdfs:label ?label .
+}
+LIMIT 200
+{{< / yasgui-query >}}

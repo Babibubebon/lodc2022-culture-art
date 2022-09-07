@@ -283,21 +283,27 @@ LIMIT 100
 
 
 ### 登場キャラクター名がタイトルであるアニメ {#anime-character-name-title}
+`schema:actor` の値として以下のような形式で記述されていることを利用し、正規表現を用いて検索します。
+
+```
+【キャラクター名】キャスト名 ／ 【キャラクター名】キャスト名 ...
+```
+
 {{< yasgui-query yasgui-id="madb-lod" title="登場キャラクター名がタイトルであるアニメ" >}}
 PREFIX schema: <https://schema.org/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX class: <https://mediaarts-db.bunka.go.jp/data/class#>
 SELECT
-	?col ?genre ?colName ?actors
+	?series ?genre ?seriesName ?actors
 WHERE {
-  ?col a ?animeColClasses ;
-         schema:name ?colName ;
+  ?series a ?animeColClasses ;
+         schema:name ?seriesName ;
          schema:genre ?genre ;
          schema:actor ?actors .
   VALUES ?animeColClasses {class:AnimationTVRegularSeries class:AnimationTVSpecialSeries class:AnimationMovieSeries}
-  FILTER(LANG(?colName) = "")
-  FILTER(REGEX(?actors, CONCAT("【", ?colName ,"】")))
+  FILTER(LANG(?seriesName) = "")
+  FILTER(REGEX(?actors, CONCAT("【", ?seriesName ,"】")))
 }
 {{< / yasgui-query >}}
 
