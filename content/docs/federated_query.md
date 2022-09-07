@@ -177,4 +177,4 @@ Wikipediaのカテゴリは上記のようなクエリで汎用的に使うこ�
 
 他にも以下のようなカテゴリを使うことで、いわゆる「聖地」による作品のキュレーションとして活用することができます。
 
-- `http://ja.dbpedia.org/resource/Category:湘南を舞台とした作品`
+- [`http://ja.dbpedia.org/resource/Category:湘南を舞台とした作品`](http://ja.dbpedia.org/resource/Category:湘南を舞台とした作品)

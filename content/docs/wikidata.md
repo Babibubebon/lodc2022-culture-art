@@ -169,6 +169,8 @@ WHERE {
 }
 {{< / yasgui-query >}}
 
+`wd:Q11424` を `wd:Q7889 (コンピュータゲーム)` など、別のクラスに変えて試してみる。
+
 
 ### 映画とその物語の場所を地図上に {#japanese-movies-narrative-location}
 - [P840 (物語の舞台)](https://www.wikidata.org/wiki/Property:P840)
