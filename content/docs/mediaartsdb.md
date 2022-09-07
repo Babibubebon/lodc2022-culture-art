@@ -42,8 +42,8 @@ SELECT * WHERE {
 
 ## クエリ集 {#queries}
 
-### 全リソースを種別ごとに集計する {#aggregation-by-genre}
-{{< yasgui-query yasgui-id="madb-lod" title="集計" >}}
+### 全リソースを種別ごとに集計する {#aggregate-by-genre}
+{{< yasgui-query yasgui-id="madb-lod" title="全リソースを種別ごとに集計する" >}}
 PREFIX schema: <https://schema.org/>
 PREFIX class:  <https://mediaarts-db.bunka.go.jp/data/class#>
 
@@ -51,14 +51,30 @@ SELECT
   ?additionalType ?class ?genre (COUNT(*) AS ?count)
 WHERE {
   ?resource a ?class;
-  		      schema:additionalType ?additionalType ;
+            schema:additionalType ?additionalType ;
             schema:genre ?genre .
 }
 GROUP BY ?class ?additionalType ?genre
 ORDER BY ?additionalType
 {{< / yasgui-query >}}
 
-### マンガ単行本の一覧を取得する {#manga-book}
+
+### マンガ単行本「鬼滅の刃 1 」の情報を取得する {#manga-book}
+https://mediaarts-db.bunka.go.jp/id/M464950
+
+{{< yasgui-query yasgui-id="madb-lod" title="マンガ単行本の一覧を取得する" >}}
+PREFIX schema: <https://schema.org/>
+PREFIX ma:     <https://mediaarts-db.bunka.go.jp/data/property#>
+PREFIX class:  <https://mediaarts-db.bunka.go.jp/data/class#>
+
+SELECT *
+WHERE {
+  <https://mediaarts-db.bunka.go.jp/id/M464950> ?p ?o .
+}
+{{< / yasgui-query >}}
+
+
+### マンガ単行本の一覧を取得する {#manga-book-list}
 「マンガ単行本」を表すクラス `https://mediaarts-db.bunka.go.jp/data/class#MangaBook`
 
 {{< yasgui-query yasgui-id="madb-lod" title="マンガ単行本の一覧を取得する" hl_lines="9" >}}
@@ -78,6 +94,7 @@ WHERE {
 }
 LIMIT 1000
 {{< / yasgui-query >}}
+
 
 ### マンガ単行本とその所蔵館の一覧を取得する {#manga-book-and-provider}
 [`https://mediaarts-db.bunka.go.jp/id/M464950`](https://mediaarts-db.bunka.go.jp/id/M464950) を主語とするTurtle形式のRDFデータ
@@ -149,7 +166,86 @@ LIMIT 1000
 
 参考: [MADB Lab: データ利活用例その２：マンガの連携機関所蔵リスト](https://mediag.bunka.go.jp/madb_lab/lod/usecase/case2/)
 
-### 公開年毎にアニメテレビレギュラーシリーズ数を集計 {#anime-tv-series}
+
+### マンガ雑誌単号の掲載内容を取得する {#magazine-has-part}
+https://mediaarts-db.bunka.go.jp/id/M701954
+
+{{< yasgui-query yasgui-id="madb-lod" title="マンガ雑誌単号の掲載内容を取得する" >}}
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX ma:     <https://mediaarts-db.bunka.go.jp/data/property#>
+PREFIX class:  <https://mediaarts-db.bunka.go.jp/data/class#>
+
+SELECT
+  ?magazineLabel ?pageStart ?pageEnd ?name ?alternativeHeadline 
+WHERE {
+  <https://mediaarts-db.bunka.go.jp/id/M701954> 
+        rdfs:label ?magazineLabel ;
+        schema:hasPart ?part .
+        
+        ?part schema:name ?name ;
+              schema:pageStart ?pageStart ;
+              schema:pageEnd ?pageEnd ;
+              ma:pageExclude ?pageExclude .
+        OPTIONAL {
+          ?part schema:alternativeHeadline ?alternativeHeadline .
+        }
+}
+ORDER BY xsd:float(?pageStart)
+{{< / yasgui-query >}}
+
+
+### 「魔法少女」を含むタイトルを検索する {#contains-magical-girl}
+{{< yasgui-query yasgui-id="madb-lod" title="「魔法少女」を含むタイトルを検索する" hl_lines="9" >}}
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema:   <https://schema.org/>
+PREFIX class:    <https://mediaarts-db.bunka.go.jp/data/class#>
+
+SELECT *
+WHERE {
+  ?s rdfs:label ?label ;
+     schema:genre ?genre .
+  FILTER CONTAINS(?label, "魔法少女")
+}
+LIMIT 100
+{{< / yasgui-query >}}
+
+### 「マリオ」が登場する作品のゲームパッケージ {#contains-mario}
+{{< yasgui-query yasgui-id="madb-lod" title="「マリオ」が登場する作品のゲームパッケージ" hl_lines="12" >}}
+PREFIX schema:   <https://schema.org/>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX class:    <https://mediaarts-db.bunka.go.jp/data/class#>
+PREFIX ma:       <https://mediaarts-db.bunka.go.jp/data/property#>
+
+SELECT ?gamePackage ?gamePackageLabel
+WHERE {
+  ?gamePackage ma:embodimentOf ?gameVariation ;
+                    rdfs:label ?gamePackageLabel .
+  ?gameVariation ma:variationOf ?gameWork .
+  ?gameWork schema:character ?character .
+  FILTER (CONTAINS(?character, "マリオ"))
+}
+{{< / yasgui-query >}}
+
+
+### 発行者毎にマンガ雑誌単号の数を集計する {#aggregate-manga-magazine-publisher}
+{{< yasgui-query yasgui-id="madb-lod" title="発行者毎にマンガ雑誌単号の数を集計する" >}}
+PREFIX schema:   <https://schema.org/>
+PREFIX class:    <https://mediaarts-db.bunka.go.jp/data/class#>
+PREFIX ma:       <https://mediaarts-db.bunka.go.jp/data/property#>
+
+SELECT ?publisher (COUNT(*) AS ?count)  WHERE {
+  ?アイテム a class:MangaMagazineIssue ;
+     schema:publisher ?publisher
+}
+GROUP BY ?publisher
+HAVING (COUNT(*) >= 100)
+ORDER BY DESC(COUNT(*))
+{{< / yasgui-query >}}
+
+
+### 公開年毎にTVアニメシリーズ数を集計 {#aggregate-anime-tv-series}
 {{< yasgui-query yasgui-id="madb-lod" title="公開年毎にTVアニメシリーズ数を集計する" >}}
 PREFIX schema: <https://schema.org/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -164,8 +260,30 @@ ORDER BY ASC(?y)
 {{< / yasgui-query >}}
 
 
-### 登場キャラクター名がタイトルのアニメシリーズ {#anime-character-name-title}
+### タイトルに「!」「?」を多く含むTVアニメシリーズを取得する {#anime-tv-series-title-contains-marks}
 {{< yasgui-query yasgui-id="madb-lod" title="公開年毎にTVアニメシリーズ数を集計する" >}}
+PREFIX schema: <https://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX class: <https://mediaarts-db.bunka.go.jp/data/class#>
+
+SELECT ?name ?mark (STRLEN(?mark) AS ?length) WHERE {
+  ?s a class:AnimationTVRegularSeries ;
+     rdfs:label ?name .
+  FILTER(LANG(?name) = "")
+  FILTER (REGEX(?name, "[!！\\?？]+"))
+  # 記号部分を抽出
+  BIND (REPLACE(?name, "[^!！\\?？]*([!！\\?？]+)[^!！\\?？]*", "$1") AS ?mark)
+}
+ORDER BY DESC(STRLEN(?mark))
+LIMIT 100
+{{< / yasgui-query >}}
+
+※ 現在『てっぺんっ!!!!!!!!!!!!!!!』という「!」を15個含むタイトルのアニメが放送されており、恐らく過去最多を更新しました。
+
+
+### 登場キャラクター名がタイトルであるアニメ {#anime-character-name-title}
+{{< yasgui-query yasgui-id="madb-lod" title="登場キャラクター名がタイトルであるアニメ" >}}
 PREFIX schema: <https://schema.org/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
