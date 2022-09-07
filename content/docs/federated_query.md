@@ -1,6 +1,6 @@
 ---
 title: "複数エンドポイントの横断的活用"
-weight: 3
+weight: 4
 # bookFlatSection: false
 # bookToc: true
 # bookHidden: false
@@ -172,3 +172,9 @@ WHERE {
 }
 LIMIT 200
 {{< / yasgui-query >}}
+
+Wikipediaのカテゴリは上記のようなクエリで汎用的に使うことができます。
+
+他にも以下のようなカテゴリを使うことで、いわゆる「聖地」による作品のキュレーションとして活用することができます。
+
+- `http://ja.dbpedia.org/resource/Category:湘南を舞台とした作品`
