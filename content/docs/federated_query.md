@@ -178,3 +178,7 @@ Wikipediaのカテゴリは上記のようなクエリで汎用的に使うこ�
 他にも以下のようなカテゴリを使うことで、いわゆる「聖地」による作品のキュレーションとして活用することができます。
 
 - [`http://ja.dbpedia.org/resource/Category:湘南を舞台とした作品`](http://ja.dbpedia.org/resource/Category:湘南を舞台とした作品)
+  - [Wikipedia: Category:湘南を舞台とした作品](https://ja.wikipedia.org/wiki/Category:%E6%B9%98%E5%8D%97%E3%82%92%E8%88%9E%E5%8F%B0%E3%81%A8%E3%81%97%E3%81%9F%E4%BD%9C%E5%93%81)
+- [`http://ja.dbpedia.org/resource/Category:京都府を舞台とした作品`](http://ja.dbpedia.org/resource/Category:京都府を舞台とした作品)
+  - [Wikipedia: 
+Category:京都府を舞台とした作品](https://ja.wikipedia.org/wiki/Category:%E4%BA%AC%E9%83%BD%E5%BA%9C%E3%82%92%E8%88%9E%E5%8F%B0%E3%81%A8%E3%81%97%E3%81%9F%E4%BD%9C%E5%93%81)

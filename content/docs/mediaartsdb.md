@@ -303,7 +303,42 @@ WHERE {
          schema:actor ?actors .
   VALUES ?animeColClasses {class:AnimationTVRegularSeries class:AnimationTVSpecialSeries class:AnimationMovieSeries}
   FILTER(LANG(?seriesName) = "")
+  # タイトルがキャラクター名と同じ
   FILTER(REGEX(?actors, CONCAT("【", ?seriesName ,"】")))
 }
 {{< / yasgui-query >}}
 
+
+### 新海誠さんの参加作品を取得する {#anime-staff-name}
+`schema:contributor` の値として以下のような形式で記述されていることを利用し、正規表現を用いて検索します。
+
+```
+[役割名]スタッフ名 ／ [役割名]スタッフ名 ...
+```
+
+{{< yasgui-query yasgui-id="madb-lod" title="新海誠さんの参加作品を取得する" >}}
+PREFIX schema: <https://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX class: <https://mediaarts-db.bunka.go.jp/data/class#>
+
+SELECT
+	?series ?seriesName (GROUP_CONCAT(DISTINCT ?role) AS ?roles)
+WHERE {
+  ?series a ?animeColClasses ;
+         schema:name ?seriesName ;
+         schema:genre ?genre ;
+         ^schema:isPartOf ?item .
+  VALUES ?animeColClasses {class:AnimationTVRegularSeries class:AnimationTVSpecialSeries class:AnimationMovieSeries}
+  {
+    ?series schema:contributor ?contributers .
+  } UNION {
+    ?item schema:contributor ?contributers .
+  }
+  FILTER(LANG(?seriesName) = "")
+  FILTER(REGEX(?contributers, "新海[\\s　]*誠"))
+  # 役割名だけを抽出する
+  BIND(REPLACE(?contributers, ".*\\[(.+?)\\]新海[\\s　]*誠.*", "$1") AS ?role)
+}
+GROUP BY ?series ?seriesName
+{{< / yasgui-query >}}
