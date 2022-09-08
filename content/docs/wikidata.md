@@ -69,6 +69,7 @@ SELECT
 WHERE {
   # "芸術作品" の下位クラス
   ?entity wdt:P279* wd:Q838948 .
+  FILTER EXISTS { ?s wdt:P31 ?entity . }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],ja,en". }
 }
 LIMIT 1000
@@ -92,6 +93,7 @@ WHERE {
   # "日本のアニメおよび漫画" の一部分であるクラス
   # "日本のアニメおよび漫画" の一部分であるクラスの下位クラス
   ?entity wdt:P279*/wdt:P361* wd:Q10901350 .
+  FILTER EXISTS { ?s wdt:P31 ?entity . }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],ja,en". }
 }
 {{< / yasgui-query >}}
