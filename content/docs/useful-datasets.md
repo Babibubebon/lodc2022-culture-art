@@ -37,3 +37,51 @@ weight: 5
     - LuciaDB: https://github.com/Assault-Lily/LuciaDB
     - 2022.07.24 アサルトリリィ関連情報を取り扱うファンサイト「Lemonade」が公認化！  
       https://www.assaultlily.com/news/1405.html/
+
+-----
+
+{{< yasgui id="datasets" />}}
+
+-----
+
+## クエリ例
+### ジャパンサーチ: 「手塚治虫」の著作を取得する {#jpsearch-tezuka-osamu}
+`https://jpsearch.go.jp/rdf/sparql/`
+{{< yasgui-query yasgui-id="datasets" title="「手塚治虫」の著作を取得する" endpoint="https://jpsearch.go.jp/rdf/sparql/" >}}
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX jps: <https://jpsearch.go.jp/term/property#>
+
+SELECT ?s ?label ?datePublished ?providerLabel
+WHERE {
+  ?s schema:creator/owl:sameAs*
+       <http://id.ndl.go.jp/auth/entity/00083890> ;
+       #<https://mediaarts-db.bunka.go.jp/id/C48012> ;
+       #<http://ja.dbpedia.org/resource/手塚治虫> ;
+     rdfs:label ?label ;
+     schema:datePublished ?datePublished ;
+     jps:sourceInfo [
+        schema:provider/rdfs:label ?providerLabel ;
+     ] .
+}
+{{< / yasgui-query >}}
+
+
+### LuciaDB: レギオンとその所属リリィの数を集計する {#luciadb-legion-list}
+`https://luciadb.assaultlily.com/sparql/query`
+{{< yasgui-query yasgui-id="datasets" title="レギオンとその所属リリィの数を集計する" endpoint="https://luciadb.assaultlily.com/sparql/query" >}}
+PREFIX lilyrdf: <https://luciadb.assaultlily.com/rdf/RDFs/detail/>
+PREFIX lily: <https://luciadb.assaultlily.com/rdf/IRIs/lily_schema.ttl#>
+PREFIX schema: <http://schema.org/>
+
+SELECT
+    ?s ?name (COUNT(DISTINCT ?member) AS ?members)
+WHERE {
+  ?s a lily:Legion ;
+     schema:name ?name ;
+     schema:member ?member .
+  FILTER (LANG(?name) = "ja")
+}
+GROUP BY ?s ?name
+{{< / yasgui-query >}}
