@@ -68,6 +68,26 @@ WHERE {
 {{< / yasgui-query >}}
 
 
+### ジャパンサーチ: パブリックドメイン(CC0)な作品の画像を取得する {#jpsearch-public-domain-image}
+`https://jpsearch.go.jp/rdf/sparql/`
+{{< yasgui-query yasgui-id="datasets" title="パブリックドメイン(CC0)な作品の画像を取得する" endpoint="https://jpsearch.go.jp/rdf/sparql/" >}}
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX jps: <https://jpsearch.go.jp/term/property#>
+
+SELECT ?class ?label ?creatorLabel ?media WHERE {
+  ?s a ?class ;
+     schema:creator/rdfs:label ?creatorLabel ; 
+     rdfs:label ?label ;
+     jps:accessInfo [
+       schema:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+       schema:associatedMedia ?media ;
+     ] .
+}
+{{< / yasgui-query >}}
+
+
 ### LuciaDB: レギオンとその所属リリィの数を集計する {#luciadb-legion-list}
 `https://luciadb.assaultlily.com/sparql/query`
 {{< yasgui-query yasgui-id="datasets" title="レギオンとその所属リリィの数を集計する" endpoint="https://luciadb.assaultlily.com/sparql/query" >}}
