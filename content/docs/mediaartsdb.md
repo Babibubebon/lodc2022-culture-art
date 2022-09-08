@@ -197,6 +197,8 @@ ORDER BY xsd:float(?pageStart)
 
 
 ### 「魔法少女」を含むタイトルを検索する {#contains-magical-girl}
+`CONTAINS` 関数を使って、文字列の部分一致を条件に指定します。
+
 {{< yasgui-query yasgui-id="madb-lod" title="「魔法少女」を含むタイトルを検索する" hl_lines="9" >}}
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema:   <https://schema.org/>
@@ -210,6 +212,7 @@ WHERE {
 }
 LIMIT 100
 {{< / yasgui-query >}}
+
 
 ### 「マリオ」が登場する作品のゲームパッケージ {#contains-mario}
 {{< yasgui-query yasgui-id="madb-lod" title="「マリオ」が登場する作品のゲームパッケージ" hl_lines="12" >}}
@@ -230,7 +233,7 @@ WHERE {
 
 
 ### 発行者毎にマンガ雑誌単号の数を集計する {#aggregate-manga-magazine-publisher}
-{{< yasgui-query yasgui-id="madb-lod" title="発行者毎にマンガ雑誌単号の数を集計する" >}}
+{{< yasgui-query yasgui-id="madb-lod" title="発行者毎にマンガ雑誌単号の数を集計する" hl_lines="9-10" >}}
 PREFIX schema:   <https://schema.org/>
 PREFIX class:    <https://mediaarts-db.bunka.go.jp/data/class#>
 PREFIX ma:       <https://mediaarts-db.bunka.go.jp/data/property#>
@@ -245,13 +248,30 @@ ORDER BY DESC(COUNT(*))
 {{< / yasgui-query >}}
 
 
-### 公開年毎にTVアニメシリーズ数を集計 {#aggregate-anime-tv-series}
+### ゲームプラットフォーム毎にゲームパッケージ数を集計する {#aggregate-game-platform}
+{{< yasgui-query yasgui-id="madb-lod" title="ゲームプラットフォーム毎にゲームパッケージ数を集計する" >}}
+PREFIX schema: <https://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX class: <https://mediaarts-db.bunka.go.jp/data/class#>
+
+SELECT ?platform (COUNT(*) AS ?count)  WHERE {
+  ?s a class:GamePackage ;
+     schema:gamePlatform ?platform .
+}
+GROUP BY ?platform
+ORDER BY DESC(?count)
+{{< / yasgui-query >}}
+
+
+### 公開年毎にTVアニメシリーズ数を集計する {#aggregate-anime-tv-series}
 {{< yasgui-query yasgui-id="madb-lod" title="公開年毎にTVアニメシリーズ数を集計する" >}}
 PREFIX schema: <https://schema.org/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX class: <https://mediaarts-db.bunka.go.jp/data/class#>
-SELECT ?y (COUNT(DISTINCT *) AS ?cnt)  WHERE {
+
+SELECT ?y (COUNT(DISTINCT *) AS ?count)  WHERE {
   ?s a class:AnimationTVRegularSeries ;
      schema:datePublished ?datePublished .
 }
@@ -261,6 +281,8 @@ ORDER BY ASC(?y)
 
 
 ### タイトルに「!」「?」を多く含むTVアニメシリーズを取得する {#anime-tv-series-title-contains-marks}
+`REGEX` 関数を使って正規表現パターンに一致する文字列を検索します。
+
 {{< yasgui-query yasgui-id="madb-lod" title="公開年毎にTVアニメシリーズ数を集計する" >}}
 PREFIX schema: <https://schema.org/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
