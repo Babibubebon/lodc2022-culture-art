@@ -125,15 +125,15 @@ LIMIT 100
 {{< / yasgui-query >}}
 
 {{< hint info >}}
-federatedクエリの実行順序によっては、正しく結果が得られないことがあります。
+クエリは必ずしも上から順番に実行されるとは限らないため、federatedクエリの実行順序次第では非常に時間がかかる処理となり、結果が返ってこない場合があります。
 
-RDFストアによっては、クエリオプティマイザに実行順序を指示する方法が用意されており、メディア芸術データベースのSPARQLクエリサービスが使用しているAmazon Neptuneでは `hint:Query hint:joinOrder "Ordered" .` というパターンを記述します。
+RDFストアによってはクエリオプティマイザに実行順序を指示する方法が用意されており、メディア芸術データベースのSPARQLクエリサービスが使用しているAmazon Neptuneでは `hint:Query hint:joinOrder "Ordered" .` というパターンを記述します。
 
 参照: [Amazon Neptune: SPARQL クエリヒント](https://docs.aws.amazon.com/ja_jp/neptune/latest/userguide/sparql-query-hints.html)
 {{< /hint >}}
 
 
-### 「タイムトラベルを題材とした作品」を取得する
+### 「タイムトラベルを題材とした作品」を取得する {#time-travel-works}
 DBpedia JapaneseとWikidataとメディア芸術データベースを連携したfederatedクエリ
 
 {{< yasgui-query yasgui-id="federated" title="「タイムトラベルを題材とした作品」を取得する" endpoint="https://mediag.bunka.go.jp/sparql" >}}

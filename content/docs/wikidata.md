@@ -56,7 +56,7 @@ SELECT * WHERE {
 ...
 
 
-### 「芸術作品」の下位クラスを探す
+### 「芸術作品」の下位クラスを探す {#work-of-art-classes}
 {{< yasgui-query yasgui-id="wikidata" title="「芸術作品」の下位クラスを探す" >}}
 PREFIX bd: <http://www.bigdata.com/rdf#>
 PREFIX wikibase: <http://wikiba.se/ontology#>
@@ -76,7 +76,7 @@ LIMIT 1000
 {{< / yasgui-query >}}
 
 
-### 「日本のアニメおよび漫画」の一部分・下位クラスを探す
+### 「日本のアニメおよび漫画」の一部分・下位クラスを探す {#japanese-anime-manga-classes}
 [Q10901350　(日本のアニメおよび漫画)](https://www.wikidata.org/wiki/Q10901350)
 
 {{< yasgui-query yasgui-id="wikidata" title="「日本のアニメおよび漫画」の一部分・下位クラスを探す" >}}

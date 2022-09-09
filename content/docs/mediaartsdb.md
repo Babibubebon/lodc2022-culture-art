@@ -97,7 +97,7 @@ LIMIT 1000
 
 
 ### マンガ単行本とその所蔵館の一覧を取得する {#manga-book-and-provider}
-[`https://mediaarts-db.bunka.go.jp/id/M464950`](https://mediaarts-db.bunka.go.jp/id/M464950) を主語とするTurtle形式のRDFデータ
+[`https://mediaarts-db.bunka.go.jp/id/M464950`](https://mediaarts-db.bunka.go.jp/id/M464950) を主語とするTurtle形式のRDFデータ[^1]
 
 ```turtle {hl_lines="23-36"}
 <https://mediaarts-db.bunka.go.jp/id/M464950>
@@ -364,3 +364,6 @@ WHERE {
 }
 GROUP BY ?series ?seriesName
 {{< / yasgui-query >}}
+
+
+[^1]: [メディア芸術データベース（ベータ版）データセット](https://github.com/mediaarts-db/dataset/tree/397b40d4e7dd35096a8c835f55f6b2406ded2315) 2022年2月17日版(ver1.1)より
