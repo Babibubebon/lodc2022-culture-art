@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on 文化・芸術とLOD ハンズオン</title><link>https://lodc2022-culture-art.metadata.moe/docs/</link><description>Recent content in Docs on 文化・芸術とLOD ハンズオン</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><atom:link href="https://lodc2022-culture-art.metadata.moe/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>はじめに</title><link>https://lodc2022-culture-art.metadata.moe/docs/start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lodc2022-culture-art.metadata.moe/docs/start/</guid><description>はじめに # 本ハンズオンでは、LOD(Linked Open Data)として公開されている文化・芸術に関する情報に対して、 クエリ言語SPARQLを用いた活用方法をご紹介します。
-実際の公開SPARQLエンドポイントを利用して、簡単なデータを取得するクエリから、複数のデータベースを横断するような応用的なクエリまでを実践します。
+実際の公開SPARQLエンドポイントを利用して、データを取得する簡単なクエリから、複数のデータベースを横断するような応用的なクエリまでを実践します。
 事前準備 # WebブラウザがあればOKです。
 SPARQLをはじめて扱う方は、導入として以下の資料などを参照していただくのがオススメです。
 Linked Open Data 勉強会2020 資料 - SPARQLの簡単な使い方 ナレッジグラフ推論チャレンジ2021「技術勉強会」 - ナレッジグラフ（RDF）の基礎/ナレッジグラフ（RDF）用クエリ言語SPARQLの基礎 クエリの仕様 # 本ハンズオンでは、基本的にSPARQL 1.1に準拠したクエリを扱います。
